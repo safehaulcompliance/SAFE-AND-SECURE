@@ -34,7 +34,31 @@
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body {
+  overscroll-behavior-y: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+/* Smooth out scroll-driven elements with GPU compositing */
+.hero-cine-bg,
+.reveal, .reveal-x, .reveal-scale,
+.field-cell, .service, .desk-card, .run-step,
+.case-img, .road-img, .bh-img,
+img, image-slot {
+  will-change: auto;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+}
 body {
   font-family: var(--f-sans);
   background: var(--paper);

@@ -252,7 +252,7 @@ function Nav() {
           <a href="#contact">Contact</a>
         </div>
         <div className="nav-cta">
-          <span className="usdot-chip"><span className="dot"></span>USDOT 3,492,118 · ACTIVE</span>
+          <span className="usdot-chip"><span className="dot"></span>USDOT 3492118 · ACTIVE</span>
           <a className="btn btn--signal" href="#contact">Free fleet audit <Arrow/></a>
         </div>
       </div>
@@ -765,7 +765,7 @@ function CaseStudy() {
               </blockquote>
               <div className="case-byline">
                 <span className="who">Lúcio Hernandez</span>
-                <span className="role">Owner / Hernandez Logistics · USDOT 2,884,003</span>
+                <span className="role">Owner / Hernandez Logistics · USDOT 2884003</span>
               </div>
             </div>
 
@@ -893,7 +893,7 @@ function Contact() {
             <hr className="rule-soft"/>
             <div className="cm-row">
               <span className="k">Email</span>
-              <span className="v">desk@safe-and-secure.us</span>
+              <span className="v">example@gmail.com</span>
               <span className="x">Avg. reply · 38 min</span>
             </div>
             <hr className="rule-soft"/>
@@ -905,7 +905,7 @@ function Contact() {
             <hr className="rule-soft"/>
             <div className="cm-row">
               <span className="k">USDOT</span>
-              <span className="v mono tnum">3,492,118</span>
+              <span className="v mono tnum">3492118</span>
               <span className="x">Active · Authority for hire</span>
             </div>
           </div>
@@ -952,7 +952,7 @@ function Contact() {
           <div className="form-row">
             <div className="field">
               <label>Email <span className="req">*</span></label>
-              <input type="email" required placeholder="dispatch@yourcarrier.com"/>
+              <input type="email" required placeholder="example@gmail.com"/>
             </div>
             <div className="field">
               <label>Phone</label>
@@ -963,7 +963,7 @@ function Contact() {
           <div className="form-row">
             <div className="field">
               <label>USDOT # <span className="req">*</span></label>
-              <input required placeholder="3,492,118"/>
+              <input required placeholder="3492118"/>
             </div>
             <div className="field">
               <label>Fleet size</label>
@@ -1029,9 +1029,9 @@ function Footer() {
           <div className="foot-col">
             <h5>Reach us</h5>
             <a>+1 (214) 555-COMPLY</a>
-            <a>desk@safe-and-secure.us</a>
+            <a>example@gmail.com</a>
             <a>1402 Commerce St, Dallas TX</a>
-            <a>USDOT 3,492,118</a>
+            <a>USDOT 3492118</a>
             <a>MC 1,209,447</a>
           </div>
         </div>
