@@ -265,53 +265,63 @@ function Nav() {
 /* ────────────────────────────────────────────────────────── */
 function Hero() {
   return (
-    <section className="hero shell" id="top">
-      <div className="hero-eyebrow-row reveal">
-        <span>USDOT · FMCSA · IFTA · IRP partners</span>
-        <span className="sep"></span>
-        <span>EST. 2009 · DALLAS, TX</span>
+    <section className="hero-cine" id="top">
+      <div className="hero-cine-bg">
+        <image-slot id="hero-main"
+          shape="rect"
+          placeholder="Drop a hero truck photo — fleet tractor pulling a dry van."
+          src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=2400&q=92&auto=format&fit=crop"
+        ></image-slot>
+      </div>
+      <div className="hero-cine-scrim"></div>
+      <div className="hero-cine-vignette"></div>
+
+      <div className="hero-cine-inner">
+        <div className="hero-cine-eyebrow reveal">
+          <span className="dot-live"></span>
+          <span>USDOT · FMCSA · IFTA · IRP partners</span>
+          <span className="sep"></span>
+          <span>EST. 2009 · DALLAS, TX</span>
+        </div>
+
+        <h1 className="hero-cine-title line-up">
+          <Line>You drive the <em>trucks</em>.</Line>
+          <Line>We handle the <em>rest</em>.</Line>
+        </h1>
+
+        <p className="hero-cine-sub reveal" data-d="4">
+          Running a trucking company shouldn&rsquo;t mean drowning in DOT forms, audits,
+          and late-night phone calls. We take all of it off your plate — compliance,
+          logs, fuel tax, driver files, and inspections.
+          <span className="hero-cine-accent"> So you can focus on the road.</span>
+        </p>
+
+        <div className="hero-cine-cta reveal" data-d="5">
+          <a className="btn btn--signal" href="#contact">Get a free check-up <Arrow/></a>
+          <a className="btn btn--ghost-light" href="#services">See how we help</a>
+        </div>
+
+        <div className="hero-cine-foot reveal" data-d="6">
+          <div className="hcf-item">
+            <span className="hcf-num">540+</span>
+            <span className="hcf-lbl">fleets served</span>
+          </div>
+          <div className="hcf-divider"></div>
+          <div className="hcf-item">
+            <span className="hcf-num">99.4%</span>
+            <span className="hcf-lbl">audit pass rate</span>
+          </div>
+          <div className="hcf-divider"></div>
+          <div className="hcf-item">
+            <span className="hcf-num">15 yrs</span>
+            <span className="hcf-lbl">on the road</span>
+          </div>
+        </div>
       </div>
 
-      <div className="hero-2up">
-        <div className="hero-left">
-          <h1 className="display line-up" style={{position:"relative"}}>
-            <Line>You drive the <em>trucks</em>.</Line>
-            <Line>We handle the <em>rest</em>.</Line>
-            <Line>All the <span className="sig">paperwork.</span></Line>
-
-            <span className="annot reveal" data-d="6" style={{right:0, top:"-18px"}}>
-              <span>real people, real help</span>
-              <AnnotArrow/>
-            </span>
-          </h1>
-
-          <div className="hero-sub reveal" data-d="4">
-            <p>
-              Running a trucking company shouldn&rsquo;t mean drowning in DOT forms, audits,
-              and late-night phone calls. We take all of it off your plate — compliance,
-              logs, fuel tax, driver files, and inspections. So you can focus on the road.
-            </p>
-            <div className="hero-cta">
-              <a className="btn btn--signal" href="#contact">Get a free check-up <Arrow/></a>
-              <a className="btn btn--ghost" href="#services">See how we help</a>
-            </div>
-          </div>
-        </div>
-
-        <div className="hero-right clip-r reveal-scale">
-          <span className="corner-tag">ON THE ROAD · TEXAS</span>
-          <image-slot id="hero-main"
-            shape="rect"
-            placeholder="Drop a hero truck photo — fleet tractor pulling a dry van."
-            src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1600&q=90&auto=format&fit=crop"
-          ></image-slot>
-          <div className="hr-grad"></div>
-          <div className="hr-pip"><div className="pp"></div><div className="pp"></div><div className="pp"></div></div>
-          <div className="corner-foot">
-            <span>FIG. 01 · A CLEAN RIG, A PROFITABLE RIG</span>
-            <span>N 32.7767° · W 96.7970°</span>
-          </div>
-        </div>
+      <div className="hero-cine-tag">
+        <span className="hct-dot"></span>
+        <span>LIVE · DALLAS, TX</span>
       </div>
     </section>
   );
