@@ -113,29 +113,29 @@ const AnnotArrow = () => (
 function FieldGrid() {
   const cells = [
     { id: "fc-truck",   tall: true,
-      tag: "Field",      cap: ["ON THE ROAD","DRY VAN · I-35"],
-      title: <>The yard. The route. The road.</>,
-      src: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1600&q=85&auto=format&fit=crop",
+      tag: "On the road",      cap: ["LONG-HAUL","FREEDOM"],
+      title: <>Your trucks. <em>Our</em> backup.</>,
+      src: "https://images.unsplash.com/photo-1586191582151-f73872dfd183?w=1600&q=90&auto=format&fit=crop",
       placeholder: "Drop a tractor / dry-van photo." },
     { id: "fc-manager", tall: false,
-      tag: "Desk",       cap: ["DQ AUDIT","SAN ANTONIO"],
-      title: <>Compliance, handled.</>,
-      src: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=1200&q=85&auto=format&fit=crop",
+      tag: "Our desk",       cap: ["COMPLIANCE","DONE FOR YOU"],
+      title: <>Paperwork? <em>Handled.</em></>,
+      src: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1200&q=90&auto=format&fit=crop",
       placeholder: "Drop a compliance manager at her desk." },
     { id: "fc-paperwork", tall: false,
-      tag: "Files",      cap: ["DQF · MCS-150","FILE 2,118"],
-      title: <>Every cite. Every page.</>,
-      src: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&q=85&auto=format&fit=crop",
+      tag: "Filings",      cap: ["EVERY FORM","ON TIME"],
+      title: <>No more late filings.</>,
+      src: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&q=90&auto=format&fit=crop",
       placeholder: "Drop paperwork / documents." },
     { id: "fc-driver",   tall: false,
-      tag: "Driver",     cap: ["PRE-TRIP INSP.","DALLAS YARD"],
-      title: <>Inspections, before the inspector.</>,
-      src: "https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=1200&q=85&auto=format&fit=crop",
+      tag: "Drivers",     cap: ["SAFETY FIRST","ALWAYS"],
+      title: <>Drivers, protected.</>,
+      src: "https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=1200&q=90&auto=format&fit=crop",
       placeholder: "Drop a driver doing a pre-trip." },
     { id: "fc-night",    tall: false,
-      tag: "24 / 7",     cap: ["NIGHT DESK","02:14 CT"],
-      title: <>The 2 a.m. call from Laredo.</>,
-      src: "https://images.unsplash.com/photo-1591768793355-74d04bb6608f?w=1200&q=85&auto=format&fit=crop",
+      tag: "24/7 help",     cap: ["DAY OR NIGHT","WE PICK UP"],
+      title: <>Call us. Anytime.</>,
+      src: "https://images.unsplash.com/photo-1591768793355-74d04bb6608f?w=1200&q=90&auto=format&fit=crop",
       placeholder: "Drop a night-yard / loading-dock photo." },
   ];
 
@@ -144,15 +144,15 @@ function FieldGrid() {
       <div className="shell">
         <div className="sec-head">
           <div className="reveal">
-            <div className="label">§ Field — what the work actually looks like</div>
+            <div className="label">§ Real work, real results</div>
             <h2 className="line-up">
-              <Line>From the <em>yard</em> at 4 a.m.</Line>
-              <Line>to the <em>file</em> at the audit.</Line>
+              <Line>From the <em>truck</em> at dawn</Line>
+              <Line>to the <em>office</em> at midnight.</Line>
             </h2>
           </div>
           <p className="lede reveal" data-d="2">
-            Compliance and safety aren&rsquo;t abstract. They&rsquo;re a pre-trip inspection at dawn,
-            a DQ folder rebuilt by Friday, and a call answered at 2 a.m. We do all three.
+            Keeping your trucks safe and your business legal isn&rsquo;t just paperwork. It&rsquo;s a driver
+            inspection at sunrise, a clean file by Friday, and a real person answering when you call.
           </p>
         </div>
 
@@ -275,35 +275,35 @@ function Hero() {
       <div className="hero-2up">
         <div className="hero-left">
           <h1 className="display line-up" style={{position:"relative"}}>
-            <Line>You haul the freight.</Line>
-            <Line>We haul the <em>paperwork</em>,</Line>
-            <Line>the audits, &amp; the <span className="sig">inspectors.</span></Line>
+            <Line>You drive the <em>trucks</em>.</Line>
+            <Line>We handle the <em>rest</em>.</Line>
+            <Line>All the <span className="sig">paperwork.</span></Line>
 
             <span className="annot reveal" data-d="6" style={{right:0, top:"-18px"}}>
-              <span>signed by humans</span>
+              <span>real people, real help</span>
               <AnnotArrow/>
             </span>
           </h1>
 
           <div className="hero-sub reveal" data-d="4">
             <p>
-              Safe &amp; Secure is the back office your fleet doesn&rsquo;t have time to build —
-              DOT compliance, ELD &amp; HOS, IFTA filings, driver qualification, CSA defense,
-              and insurance optimization. One desk. One bill. Zero violations.
+              Running a trucking company shouldn&rsquo;t mean drowning in DOT forms, audits,
+              and late-night phone calls. We take all of it off your plate — compliance,
+              logs, fuel tax, driver files, and inspections. So you can focus on the road.
             </p>
             <div className="hero-cta">
-              <a className="btn btn--signal" href="#contact">Book a free audit <Arrow/></a>
-              <a className="btn btn--ghost" href="#services">See what we cover</a>
+              <a className="btn btn--signal" href="#contact">Get a free check-up <Arrow/></a>
+              <a className="btn btn--ghost" href="#services">See how we help</a>
             </div>
           </div>
         </div>
 
         <div className="hero-right clip-r reveal-scale">
-          <span className="corner-tag">LIVE · ROUTE 35-N</span>
+          <span className="corner-tag">ON THE ROAD · TEXAS</span>
           <image-slot id="hero-main"
             shape="rect"
             placeholder="Drop a hero truck photo — fleet tractor pulling a dry van."
-            src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1600&q=85&auto=format&fit=crop"
+            src="https://images.unsplash.com/photo-1586191582151-f73872dfd183?w=1600&q=90&auto=format&fit=crop"
           ></image-slot>
           <div className="hr-grad"></div>
           <div className="hr-pip"><div className="pp"></div><div className="pp"></div><div className="pp"></div></div>
@@ -336,15 +336,15 @@ function BelowHero() {
     <div className="shell reveal" data-d="2">
       <div className="belowhero">
         <div className="bh-img clip-r">
-          <span className="corner-tag">FIG. 01 · The yard</span>
+          <span className="corner-tag">YOUR FLEET, PROTECTED</span>
           <image-slot id="hero-truck"
             shape="rect"
             placeholder="Drop a hero photo — fleet tractor pulling a dry van at dawn works best."
-            src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1600&q=80&auto=format&fit=crop"
+            src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=1600&q=90&auto=format&fit=crop"
           ></image-slot>
           <div className="img-overlay">
-            <span className="cap">A clean rig is a profitable rig</span>
-            <span className="num">N 32.7767° · W 96.7970°</span>
+            <span className="cap">A safe rig is a profitable rig</span>
+            <span className="num">Dallas, Texas</span>
           </div>
         </div>
 
@@ -495,24 +495,24 @@ function LiveDesk() {
 /* Services                                                    */
 /* ────────────────────────────────────────────────────────── */
 const SERVICES = [
-  { n: "01", title: <>DOT &amp; FMCSA <em>compliance</em></>,
-    blurb: "MCS-150 updates, biennial filings, new-entrant safety audits, and operating-authority maintenance. We keep your file clean before the inspector ever knocks.",
-    meta: "Audits · Filings · Authority" },
-  { n: "02", title: <>ELD &amp; HOS <em>oversight</em></>,
-    blurb: "We monitor your fleet's hours-of-service in real time across Samsara, Motive, Geotab, and Verizon Connect — and flag violations before they become CSA points.",
-    meta: "Samsara · Motive · Geotab" },
-  { n: "03", title: <>IFTA &amp; IRP <em>filings</em></>,
-    blurb: "Quarterly fuel-tax returns and apportioned-plate renewals across all 48 contiguous states plus Canada. Mileage, gallons, and jurisdictions — reconciled.",
-    meta: "Quarterly · 48 states + CA" },
-  { n: "04", title: <>Driver qualification <em>files</em></>,
-    blurb: "MVRs, road tests, medical cards, Clearinghouse queries, and PSP reports — kept current, indexed, and ready for any audit in under 12 minutes.",
-    meta: "DQF · Clearinghouse · MVR" },
-  { n: "05", title: <>CSA score <em>defense</em></>,
-    blurb: "We DataQ challenges, contest unsafe-driver assignments, and coach the BASICs that move your CSA score down quarter over quarter.",
-    meta: "DataQ · BASICs · Coaching" },
-  { n: "06", title: <>Insurance &amp; risk <em>strategy</em></>,
-    blurb: "We broker primary liability + cargo + physical damage, then build the loss-runs story that earns you single-digit renewals when others see double.",
-    meta: "Liability · Cargo · PD" },
+  { n: "01", title: <>DOT <em>compliance</em>, sorted</>,
+    blurb: "Every form, filing, and renewal the DOT throws at you — we handle it. Your authority stays active, your file stays clean, and inspectors have nothing to flag.",
+    meta: "Forms · Filings · Renewals" },
+  { n: "02", title: <>Driver logs &amp; <em>hours</em></>,
+    blurb: "We watch your drivers' hours in real time on whatever ELD you use — Samsara, Motive, Geotab, you name it. We catch problems before they become tickets.",
+    meta: "Works with every ELD" },
+  { n: "03", title: <>Fuel tax (<em>IFTA</em>) &amp; plates</>,
+    blurb: "Quarterly fuel tax filings and plate renewals across all 48 states and Canada. You send us the miles and fuel — we do the math and file on time.",
+    meta: "All 48 states + Canada" },
+  { n: "04", title: <>Driver files, <em>audit-ready</em></>,
+    blurb: "MVRs, medical cards, drug tests, road tests — every driver file kept current and organized. When the auditor asks, we have it pulled up in minutes.",
+    meta: "Always inspection-ready" },
+  { n: "05", title: <>Fight unfair <em>tickets</em></>,
+    blurb: "Got a roadside inspection that wasn't your fault? We challenge it. Last year we cleared 71% of the violations we fought — keeping your safety score clean.",
+    meta: "71% win rate" },
+  { n: "06", title: <>Lower <em>insurance</em> rates</>,
+    blurb: "We shop your insurance every renewal — liability, cargo, and physical damage. Our customers save 9% on average compared to what they were paying before.",
+    meta: "Save 9% on average" },
 ];
 
 function Services() {
@@ -520,12 +520,12 @@ function Services() {
     <section className="sec shell" id="services">
       <div className="sec-head">
         <div className="reveal">
-          <div className="label">§ Services — 01 / 06</div>
-          <h2 className="line-up"><Line>Six desks.</Line><Line><em>One number to call.</em></Line></h2>
+          <div className="label">§ What we do — 01 / 06</div>
+          <h2 className="line-up"><Line>Everything you need.</Line><Line><em>One team to call.</em></Line></h2>
         </div>
         <p className="lede reveal" data-d="2">
-          Most carriers piece compliance together from a TPA here, an insurance broker there, and a
-          dispatcher who fills out IFTA on Saturdays. We are all of that — and we sign our work.
+          Most trucking companies juggle a dozen vendors — one for insurance, one for IFTA, one for
+          ELDs, one for audits. We do it all under one roof, with one phone number, signed by real people.
         </p>
       </div>
 
@@ -559,7 +559,7 @@ function OnTheRoad() {
           <image-slot id="road-fleet"
             shape="rect"
             placeholder="Drop a wide highway/fleet photo here."
-            src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=2000&q=85&auto=format&fit=crop"
+            src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=2000&q=95&auto=format&fit=crop"
           ></image-slot>
         </div>
 
@@ -1082,7 +1082,6 @@ function App() {
 
   return (
     <>
-      <StatusBar/>
       <Nav/>
       <Hero/>
       <BelowHero/>
