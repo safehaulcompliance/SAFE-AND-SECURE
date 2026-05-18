@@ -568,7 +568,7 @@ function OnTheRoad() {
           <image-slot id="road-fleet"
             shape="rect"
             placeholder="Drop a wide highway/fleet photo here."
-            src="https://images.unsplash.com/photo-1494412519320-aa613dfb7738?w=2000&q=95&auto=format&fit=crop"
+            src="https://images.unsplash.com/photo-1578575494546-b5fc5eac614f?w=2000&q=95&auto=format&fit=crop"
           ></image-slot>
         </div>
 
