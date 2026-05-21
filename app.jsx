@@ -935,7 +935,7 @@ function Contact() {
           <div className="form-row">
             <div className="field">
               <label>Your name <span className="req">*</span></label>
-              <input required placeholder="Rajeshwar Singh"/>
+              <input required placeholder=""/>
             </div>
             <div className="field">
               <label>Role</label>
