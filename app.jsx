@@ -505,22 +505,22 @@ function LiveDesk() {
 /* ────────────────────────────────────────────────────────── */
 const SERVICES = [
   { n: "01", title: <>MC <em>Authority</em></>,
-    blurb: "Need to start a trucking company? We get your MC Authority — the paperwork that lets you legally haul freight. New or renewing, we handle it start to finish.",
+    blurb: "Get your operating authority and keep it legal. We handle all the paperwork so you can start or grow your trucking business.",
     meta: "New + Renewals" },
   { n: "02", title: <>DQ <em>Files</em></>,
-    blurb: "Driver qualification files done right. Medical cards, road tests, abstracts, and drug tests — all kept up to date and ready for any audit, anytime.",
+    blurb: "Driver records kept current. Medical exams, tests, background checks — everything filed and ready for inspections.",
     meta: "Always audit-ready" },
   { n: "03", title: <>Driver <em>Hiring</em></>,
-    blurb: "Hiring new drivers? We do the background checks, abstracts, and onboarding paperwork. You meet them, we make sure they're road-ready and legal to drive.",
+    blurb: "New drivers checked and ready. We do the background checks and paperwork so you know your team is safe and legal.",
     meta: "Onboarding + checks" },
   { n: "04", title: <>HOS <em>Monitoring</em></>,
-    blurb: "We watch your drivers' Hours of Service in real time on whatever ELD you use. We catch problems before they become tickets — and keep your logs clean.",
+    blurb: "Track driver hours in real time. We watch for safety issues and keep your logs clean with any ELD system.",
     meta: "Works with every ELD" },
   { n: "05", title: <>IFTA &amp; <em>IRP</em></>,
-    blurb: "Quarterly fuel tax (IFTA) filings and apportioned plate (IRP) renewals across all provinces and US states. You send us miles and fuel — we file on time.",
+    blurb: "Fuel tax and registration filed on time, every time. All provinces and states covered.",
     meta: "Filed every quarter" },
   { n: "06", title: <>Permits, <em>handled</em></>,
-    blurb: "UCR, oversize, overweight, hazmat, fuel permits — whatever permit your truck needs to keep rolling, we get it. Fast turnarounds, no missed paperwork.",
+    blurb: "All permits applied and renewed — UCR, oversize, hazmat, fuel. Nothing missed, nothing late.",
     meta: "All Canadian + US" },
 ];
 
