@@ -1,0 +1,25 @@
+<svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+  <!-- Circle background -->
+  <circle cx="200" cy="180" r="120" fill="none" stroke="#003d7a" stroke-width="12"/>
+
+  <!-- Truck icon (simplified) -->
+  <g transform="translate(200, 180)">
+    <!-- Cargo container lines -->
+    <line x1="-60" y1="-40" x2="-20" y2="-40" stroke="#3b82f6" stroke-width="10" stroke-linecap="round"/>
+    <line x1="-60" y1="-20" x2="-20" y2="-20" stroke="#3b82f6" stroke-width="10" stroke-linecap="round"/>
+    <line x1="-60" y1="0" x2="-20" y2="0" stroke="#3b82f6" stroke-width="10" stroke-linecap="round"/>
+
+    <!-- Cabin/front section -->
+    <path d="M -10,-35 L 30,-35 L 40,0 L -10,0 Z" fill="none" stroke="#3b82f6" stroke-width="10" stroke-linejoin="round"/>
+
+    <!-- Windshield -->
+    <circle cx="15" cy="-20" r="12" fill="none" stroke="#003d7a" stroke-width="8"/>
+
+    <!-- Horizontal line through middle -->
+    <line x1="-70" y1="15" x2="50" y2="15" stroke="#003d7a" stroke-width="12" stroke-linecap="round"/>
+  </g>
+
+  <!-- Company text -->
+  <text x="200" y="360" font-family="Arial, sans-serif" font-size="56" font-weight="bold" text-anchor="middle" fill="#003d7a">SAFE HAUL</text>
+  <text x="200" y="420" font-family="Arial, sans-serif" font-size="42" font-weight="600" text-anchor="middle" fill="#3b82f6">COMPLIANCE</text>
+</svg>
