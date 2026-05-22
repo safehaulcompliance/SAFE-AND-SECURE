@@ -1070,11 +1070,11 @@ hr.rule-soft { border:0; height:1px; background: var(--rule-soft); margin:0; }
 .ld-items li .t { font-family: var(--f-sans); font-size: 13px; color: var(--mute-2); }
 .ld-items li .kind {
   font-family: var(--f-sans); font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
-  color: var(--ink); background: var(--signal); padding: 4px 8px; border-radius: 3px;
+  color: var(--paper); background: var(--mute); padding: 4px 8px; border-radius: 3px;
 }
-.ld-items li .kind.done { background: var(--safe); color: var(--paper); }
-.ld-items li .kind.work { background: var(--paper-2); color: var(--ink); }
-.ld-items li .kind.win  { background: var(--ember); color: var(--paper); }
+.ld-items li .kind.done { background: var(--mute); color: var(--paper); }
+.ld-items li .kind.work { background: var(--mute); color: var(--paper); }
+.ld-items li .kind.win  { background: var(--mute); color: var(--paper); }
 .ld-items li .what { color: var(--paper); font-weight: 500; }
 .ld-items li .who  { font-family: var(--f-sans); font-size: 13px; color: var(--mute-2); text-align: right; }
 
