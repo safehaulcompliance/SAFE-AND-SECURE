@@ -240,8 +240,7 @@ function Nav() {
     <nav className="nav">
       <div className="shell nav-row">
         <a className="nav-brand" href="#top">
-          <span className="brand-mark">S</span>
-          <span>Safe Haul Compliance</span>
+          <img src="logo.png" alt="Safe Haul Compliance" className="nav-logo"/>
         </a>
         <div className="nav-links">
           <a href="#services">Services</a>
@@ -992,10 +991,6 @@ function Footer() {
       <div className="shell">
         <div className="foot-top">
           <div className="foot-brand">
-            <h3 className="line-up">
-              <Line>Proactive</Line>
-              <Line>Safety <em>Solutions.</em></Line>
-            </h3>
             <p>Compliance and safety for Canadian trucking. Based in Ontario, since 2009. Real people, not a portal.</p>
           </div>
           <div className="foot-col">
