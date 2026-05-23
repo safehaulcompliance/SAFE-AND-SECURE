@@ -2,24 +2,24 @@
   <!-- Icon: circle with truck on left -->
   <g transform="translate(100, 100)">
     <!-- Outer circle -->
-    <circle cx="0" cy="0" r="85" fill="none" stroke="#0A1F44" stroke-width="8"/>
+    <circle cx="0" cy="0" r="85" fill="none" stroke="#FFFFFF" stroke-width="8"/>
 
     <!-- Cargo container horizontal lines -->
-    <line x1="-50" y1="-30" x2="-10" y2="-30" stroke="#2563EB" stroke-width="7" stroke-linecap="round"/>
-    <line x1="-50" y1="-15" x2="-10" y2="-15" stroke="#2563EB" stroke-width="7" stroke-linecap="round"/>
-    <line x1="-50" y1="0" x2="-10" y2="0" stroke="#2563EB" stroke-width="7" stroke-linecap="round"/>
+    <line x1="-50" y1="-30" x2="-10" y2="-30" stroke="#60A5FA" stroke-width="7" stroke-linecap="round"/>
+    <line x1="-50" y1="-15" x2="-10" y2="-15" stroke="#60A5FA" stroke-width="7" stroke-linecap="round"/>
+    <line x1="-50" y1="0" x2="-10" y2="0" stroke="#60A5FA" stroke-width="7" stroke-linecap="round"/>
 
     <!-- Cabin/front section -->
-    <path d="M -5,-28 L 30,-28 L 38,0 L -5,0 Z" fill="none" stroke="#2563EB" stroke-width="7" stroke-linejoin="round"/>
+    <path d="M -5,-28 L 30,-28 L 38,0 L -5,0 Z" fill="none" stroke="#60A5FA" stroke-width="7" stroke-linejoin="round"/>
 
     <!-- Windshield -->
-    <circle cx="15" cy="-18" r="8" fill="none" stroke="#0A1F44" stroke-width="5"/>
+    <circle cx="15" cy="-18" r="8" fill="none" stroke="#FFFFFF" stroke-width="5"/>
 
     <!-- Horizontal base line -->
-    <line x1="-65" y1="15" x2="50" y2="15" stroke="#0A1F44" stroke-width="8" stroke-linecap="round"/>
+    <line x1="-65" y1="15" x2="50" y2="15" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"/>
   </g>
 
   <!-- Text on right side -->
-  <text x="220" y="95" font-family="Inter, Arial, Helvetica, sans-serif" font-size="58" font-weight="700" fill="#0A1F44" letter-spacing="2">SAFE HAUL</text>
-  <text x="220" y="150" font-family="Inter, Arial, Helvetica, sans-serif" font-size="38" font-weight="500" fill="#2563EB" letter-spacing="6">COMPLIANCE</text>
+  <text x="220" y="95" font-family="Inter, Arial, Helvetica, sans-serif" font-size="58" font-weight="700" fill="#FFFFFF" letter-spacing="2">SAFE HAUL</text>
+  <text x="220" y="150" font-family="Inter, Arial, Helvetica, sans-serif" font-size="38" font-weight="500" fill="#60A5FA" letter-spacing="6">COMPLIANCE</text>
 </svg>

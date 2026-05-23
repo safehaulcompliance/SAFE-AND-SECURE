@@ -367,9 +367,27 @@
       });
     }
 
-    // ───── 5. (scroll progress bar removed) ──────────────────
+    // ───── 5. NAV BACKGROUND CHANGE ON SCROLL ────────────────
+    const nav = document.querySelector('.nav');
+    const hero = document.querySelector('.hero-cine');
+
+    function updateNavBg() {
+      if (!nav) return;
+      const heroHeight = hero ? hero.offsetHeight : 600;
+      // Switch nav to white glass once user scrolls past most of the hero
+      if (window.pageYOffset > heroHeight - 100) {
+        nav.classList.add('nav-scrolled');
+      } else {
+        nav.classList.remove('nav-scrolled');
+      }
+    }
+
     // ───── 6. (back-to-top button removed) ───────────────────
     // ───── 7. SCROLL EVENTS ──────────────────────────────────
+    window.addEventListener('scroll', function() {
+      updateNavBg();
+    }, { passive: true });
+    updateNavBg();
 
     // ───── 8. INTERSECTION OBSERVER FOR REVEALS ──────────────
     function bindScrollReveals() {

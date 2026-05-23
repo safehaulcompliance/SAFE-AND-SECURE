@@ -316,7 +316,7 @@ function Hero() {
 
       <div className="hero-cine-tag">
         <span className="hct-dot"></span>
-        <span>LIVE · ONTARIO, CANADA</span>
+        <span>LIVE · USA &amp; CANADA</span>
       </div>
     </section>
   );

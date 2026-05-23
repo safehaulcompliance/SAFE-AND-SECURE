@@ -849,12 +849,20 @@ hr.rule-soft { border:0; height:1px; background: var(--rule-soft); margin:0; }
 
 /* ── nav ───────────────────────────────────────────────── */
 .nav {
-  position: sticky; top: 0; z-index: 50;
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(28px) saturate(200%);
-  -webkit-backdrop-filter: blur(28px) saturate(200%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 1px 0 rgba(10, 31, 68, 0.05), 0 8px 32px rgba(31, 38, 135, 0.05);
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  background: rgba(10, 31, 68, 0.4);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  transition: background .4s ease, border-color .4s ease;
+}
+
+/* When scrolled past hero, nav becomes white glass */
+.nav.nav-scrolled {
+  background: rgba(255, 255, 255, 0.7);
+  border-bottom: 1px solid rgba(10, 31, 68, 0.08);
+  box-shadow: 0 4px 24px rgba(31, 38, 135, 0.08);
 }
 .nav-row {
   display: flex; align-items: center; justify-content: space-between;
@@ -883,17 +891,17 @@ hr.rule-soft { border:0; height:1px; background: var(--rule-soft); margin:0; }
 }
 .nav-links {
   display: flex; gap: 4px;
-  background: rgba(10, 31, 68, 0.04);
+  background: rgba(255, 255, 255, 0.08);
   padding: 6px;
   border-radius: 100px;
-  border: 1px solid rgba(10, 31, 68, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(10px);
 }
 .nav-links a {
   font-size: 14px;
   font-weight: 500;
   letter-spacing: -0.01em;
-  color: var(--ink-2);
+  color: rgba(255, 255, 255, 0.85);
   padding: 8px 18px;
   border-radius: 100px;
   transition: all .25s cubic-bezier(.22,.61,.36,1);
@@ -901,13 +909,26 @@ hr.rule-soft { border:0; height:1px; background: var(--rule-soft); margin:0; }
   cursor: pointer;
 }
 .nav-links a:hover {
-  color: var(--paper-2);
-  background: var(--ink);
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.15);
   transform: translateY(-1px);
 }
 .nav-links a.active {
   background: var(--signal);
   color: #FFFFFF;
+}
+
+/* When nav is scrolled past hero, links go dark */
+.nav.nav-scrolled .nav-links {
+  background: rgba(10, 31, 68, 0.04);
+  border-color: rgba(10, 31, 68, 0.1);
+}
+.nav.nav-scrolled .nav-links a {
+  color: var(--ink-2);
+}
+.nav.nav-scrolled .nav-links a:hover {
+  color: #FFFFFF;
+  background: var(--ink);
 }
 .nav-cta { display:flex; align-items:center; gap: 14px; }
 .usdot-chip {
