@@ -248,7 +248,6 @@ function Nav() {
           <a href="#contact">Contact</a>
         </div>
         <div className="nav-cta">
-          <span className="usdot-chip"><span className="dot"></span>USDOT 3492118 · ACTIVE</span>
           <a className="btn btn--signal" href="#contact">Free fleet audit <Arrow/></a>
         </div>
       </div>
@@ -277,7 +276,7 @@ function Hero() {
           <span className="dot-live"></span>
           <span>MC AUTHORITY · IFTA · IRP · PERMITS</span>
           <span className="sep"></span>
-          <span>EST. 2009 · ONTARIO, CANADA</span>
+          <span>ONTARIO, CANADA</span>
         </div>
 
         <h1 className="hero-cine-title line-up">
@@ -299,18 +298,18 @@ function Hero() {
 
         <div className="hero-cine-foot reveal" data-d="6">
           <div className="hcf-item">
-            <span className="hcf-num">540+</span>
-            <span className="hcf-lbl">fleets served</span>
+            <span className="hcf-num">Built for</span>
+            <span className="hcf-lbl">Canadian fleets</span>
           </div>
           <div className="hcf-divider"></div>
           <div className="hcf-item">
-            <span className="hcf-num">99.4%</span>
-            <span className="hcf-lbl">audit pass rate</span>
+            <span className="hcf-num">Plain</span>
+            <span className="hcf-lbl">English service</span>
           </div>
           <div className="hcf-divider"></div>
           <div className="hcf-item">
-            <span className="hcf-num">15 yrs</span>
-            <span className="hcf-lbl">on the road</span>
+            <span className="hcf-num">Real</span>
+            <span className="hcf-lbl">people, no portals</span>
           </div>
         </div>
       </div>
@@ -868,13 +867,13 @@ function Contact() {
           <div className="contact-meta">
             <div className="cm-row">
               <span className="k">Phone</span>
-              <span className="v">350-200-0085</span>
+              <span className="v">905-226-7726</span>
               <span className="x">M – F · 7a – 7p ET</span>
             </div>
             <hr className="rule-soft"/>
             <div className="cm-row">
               <span className="k">After hours</span>
-              <span className="v">350-200-0085</span>
+              <span className="v">905-226-7726</span>
               <span className="x">24 / 7 desk · roadside</span>
             </div>
             <hr className="rule-soft"/>
@@ -888,12 +887,6 @@ function Contact() {
               <span className="k">Office</span>
               <span className="v">Mississauga, Ontario, Canada</span>
               <span className="x">Walk-ins welcome</span>
-            </div>
-            <hr className="rule-soft"/>
-            <div className="cm-row">
-              <span className="k">USDOT</span>
-              <span className="v mono tnum">3492118</span>
-              <span className="x">Active · Authority for hire</span>
             </div>
           </div>
 
@@ -948,8 +941,8 @@ function Contact() {
 
           <div className="form-row">
             <div className="field">
-              <label>DOT # or MC # <span className="req">*</span></label>
-              <input required placeholder="3492118 (or MC #)"/>
+              <label>Company name</label>
+              <input placeholder="Your trucking company"/>
             </div>
             <div className="field">
               <label>Fleet size</label>
@@ -989,7 +982,7 @@ function Footer() {
       <div className="shell">
         <div className="foot-top">
           <div className="foot-brand">
-            <p>Compliance and safety for Canadian trucking. Based in Ontario, since 2009. Real people, not a portal.</p>
+            <p>Compliance and safety for Canadian trucking. Based in Ontario. Real people, not a portal.</p>
           </div>
           <div className="foot-col">
             <h5>Services</h5>
@@ -1001,20 +994,15 @@ function Footer() {
             <a href="#services">Permits</a>
           </div>
           <div className="foot-col">
-            <h5>Company</h5>
-            <a>About</a>
-            <a>Our desk</a>
-            <a>Case files</a>
-            <a>Press</a>
-            <a>Careers — 3 open</a>
-          </div>
-          <div className="foot-col">
             <h5>Reach us</h5>
-            <a>350-200-0085</a>
+            <a href="tel:9052267726">905-226-7726</a>
             <a href="mailto:info@safehaulcompliance.com">info@safehaulcompliance.com</a>
             <a>Mississauga, Ontario</a>
-            <a>USDOT 3492118</a>
-            <a>MC 1,209,447</a>
+          </div>
+          <div className="foot-col">
+            <h5>Legal</h5>
+            <a href="/privacy.html">Privacy Policy</a>
+            <a href="/terms.html">Terms of Service</a>
           </div>
         </div>
         <div className="foot-bot">
@@ -1064,9 +1052,7 @@ function App() {
       <FieldGrid/>
       <OnTheRoad/>
       <TheRun/>
-      <CaseStudy/>
       <Values/>
-      <Numbers/>
       <Contact/>
       <Footer/>
 
