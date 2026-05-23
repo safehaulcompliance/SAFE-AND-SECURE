@@ -10,95 +10,32 @@
     else document.addEventListener('DOMContentLoaded', fn);
   }
 
-  // Premium American semi-truck silhouette (Peterbilt-inspired)
+  // Cute mini truck cursor (friendly emoji style)
   const TRUCK_SVG = `
-    <svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#FFFFFF"/>
-          <stop offset="100%" stop-color="#E5E7EB"/>
-        </linearGradient>
-        <linearGradient id="cabGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#2563EB"/>
-          <stop offset="100%" stop-color="#1E40AF"/>
-        </linearGradient>
-        <linearGradient id="windowGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#BFDBFE"/>
-          <stop offset="100%" stop-color="#3B82F6"/>
-        </linearGradient>
-        <filter id="truckShadow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur in="SourceAlpha" stdDeviation="1.5"/>
-          <feOffset dx="0" dy="2"/>
-          <feComponentTransfer><feFuncA type="linear" slope="0.3"/></feComponentTransfer>
-          <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-      </defs>
+    <svg viewBox="0 0 40 28" xmlns="http://www.w3.org/2000/svg">
+      <!-- Cargo box (rounded, cute) -->
+      <rect x="1" y="6" width="22" height="14" rx="3" fill="#2563EB"/>
 
-      <g filter="url(#truckShadow)">
-        <!-- Trailer (53-foot dry van — boxy clean rectangle) -->
-        <rect x="2" y="12" width="44" height="26" rx="1.5" fill="url(#bodyGrad)" stroke="#0A1F44" stroke-width="0.8"/>
-        <!-- Trailer subtle horizontal accent line -->
-        <line x1="4" y1="22" x2="44" y2="22" stroke="#9CA3AF" stroke-width="0.4" opacity="0.6"/>
-        <line x1="4" y1="30" x2="44" y2="30" stroke="#9CA3AF" stroke-width="0.4" opacity="0.6"/>
-        <!-- Mud flap at trailer rear -->
-        <rect x="2" y="38" width="2" height="4" fill="#0A1F44"/>
+      <!-- Cab (rounded, friendly) -->
+      <path d="M 23 10 Q 23 8, 25 8 L 33 8 Q 35 8, 36 10 L 37 16 Q 37 20, 35 20 L 23 20 Z" fill="#1E40AF"/>
 
-        <!-- Cab gap -->
-        <rect x="46" y="14" width="2" height="24" fill="#0A1F44"/>
+      <!-- Big cute windshield (like an eye) -->
+      <rect x="25" y="10" width="9" height="6" rx="2" fill="#BFDBFE"/>
+      <!-- Sparkle in window -->
+      <circle cx="32" cy="12" r="0.8" fill="#FFFFFF"/>
 
-        <!-- Cab (American long-nose / Peterbilt style) -->
-        <path d="M 48 16 L 60 16 L 62 18 L 62 26 L 70 26 L 74 30 L 74 38 L 48 38 Z"
-              fill="url(#cabGrad)" stroke="#0A1F44" stroke-width="0.8" stroke-linejoin="round"/>
+      <!-- Wheels (chunky, cute) -->
+      <circle cx="7" cy="22" r="4" fill="#1F2937"/>
+      <circle cx="7" cy="22" r="1.5" fill="#9CA3AF"/>
 
-        <!-- Hood/engine bay (sloped front of American truck) -->
-        <path d="M 62 26 L 70 26 L 70 32 L 62 32 Z" fill="url(#cabGrad)" stroke="#0A1F44" stroke-width="0.6"/>
+      <circle cx="17" cy="22" r="4" fill="#1F2937"/>
+      <circle cx="17" cy="22" r="1.5" fill="#9CA3AF"/>
 
-        <!-- Windshield (split with center divider — classic American style) -->
-        <path d="M 50 18 L 60 18 L 62 22 L 50 22 Z" fill="url(#windowGrad)" stroke="#0A1F44" stroke-width="0.5"/>
-        <line x1="55" y1="18" x2="55.5" y2="22" stroke="#0A1F44" stroke-width="0.4"/>
+      <circle cx="31" cy="22" r="4" fill="#1F2937"/>
+      <circle cx="31" cy="22" r="1.5" fill="#9CA3AF"/>
 
-        <!-- Side door window -->
-        <rect x="50" y="24" width="6" height="6" rx="0.5" fill="url(#windowGrad)" stroke="#0A1F44" stroke-width="0.4"/>
-
-        <!-- Chrome grille -->
-        <rect x="70.5" y="28" width="3.5" height="4" fill="#9CA3AF"/>
-        <line x1="70.5" y1="29.5" x2="74" y2="29.5" stroke="#0A1F44" stroke-width="0.3"/>
-        <line x1="70.5" y1="31" x2="74" y2="31" stroke="#0A1F44" stroke-width="0.3"/>
-
-        <!-- Headlight -->
-        <circle cx="73" cy="34" r="1.2" fill="#FCD34D" stroke="#0A1F44" stroke-width="0.4"/>
-
-        <!-- Exhaust stack (iconic vertical chrome pipe) -->
-        <rect x="49" y="6" width="1.8" height="12" rx="0.5" fill="#9CA3AF" stroke="#0A1F44" stroke-width="0.3"/>
-        <ellipse cx="49.9" cy="6" rx="1" ry="0.6" fill="#6B7280"/>
-
-        <!-- Front bumper -->
-        <rect x="69" y="36" width="6" height="2" rx="0.5" fill="#9CA3AF" stroke="#0A1F44" stroke-width="0.3"/>
-
-        <!-- Wheels (3 sets — trailer tandem + cab tandem + steer) -->
-        <!-- Trailer tandem axles -->
-        <circle cx="10" cy="40" r="5" fill="#0A1F44"/>
-        <circle cx="10" cy="40" r="2.5" fill="#374151"/>
-        <circle cx="10" cy="40" r="1" fill="#9CA3AF"/>
-
-        <circle cx="20" cy="40" r="5" fill="#0A1F44"/>
-        <circle cx="20" cy="40" r="2.5" fill="#374151"/>
-        <circle cx="20" cy="40" r="1" fill="#9CA3AF"/>
-
-        <!-- Cab tandem -->
-        <circle cx="52" cy="40" r="5" fill="#0A1F44"/>
-        <circle cx="52" cy="40" r="2.5" fill="#374151"/>
-        <circle cx="52" cy="40" r="1" fill="#9CA3AF"/>
-
-        <circle cx="61" cy="40" r="5" fill="#0A1F44"/>
-        <circle cx="61" cy="40" r="2.5" fill="#374151"/>
-        <circle cx="61" cy="40" r="1" fill="#9CA3AF"/>
-
-        <!-- Steer axle -->
-        <circle cx="71" cy="40" r="4.5" fill="#0A1F44"/>
-        <circle cx="71" cy="40" r="2.2" fill="#374151"/>
-        <circle cx="71" cy="40" r="0.9" fill="#9CA3AF"/>
-      </g>
+      <!-- Headlight -->
+      <circle cx="36" cy="15" r="1" fill="#FCD34D"/>
     </svg>
   `;
 
