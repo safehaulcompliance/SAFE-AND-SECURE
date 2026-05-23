@@ -244,9 +244,7 @@ function Nav() {
         </a>
         <div className="nav-links">
           <a href="#services">Services</a>
-          <a href="#run">The Run</a>
-          <a href="#field">Field</a>
-          <a href="#case">Case file</a>
+          <a href="#values">Expertise</a>
           <a href="#contact">Contact</a>
         </div>
         <div className="nav-cta">

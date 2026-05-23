@@ -1,25 +1,25 @@
-<svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
-  <!-- Circle background -->
-  <circle cx="200" cy="180" r="120" fill="none" stroke="#003d7a" stroke-width="12"/>
+<svg viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Icon: circle with truck on left -->
+  <g transform="translate(100, 100)">
+    <!-- Circle background -->
+    <circle cx="0" cy="0" r="85" fill="none" stroke="#0a1f44" stroke-width="8"/>
 
-  <!-- Truck icon (simplified) -->
-  <g transform="translate(200, 180)">
-    <!-- Cargo container lines -->
-    <line x1="-60" y1="-40" x2="-20" y2="-40" stroke="#3b82f6" stroke-width="10" stroke-linecap="round"/>
-    <line x1="-60" y1="-20" x2="-20" y2="-20" stroke="#3b82f6" stroke-width="10" stroke-linecap="round"/>
-    <line x1="-60" y1="0" x2="-20" y2="0" stroke="#3b82f6" stroke-width="10" stroke-linecap="round"/>
+    <!-- Cargo container horizontal lines -->
+    <line x1="-50" y1="-30" x2="-10" y2="-30" stroke="#4a90e2" stroke-width="7" stroke-linecap="round"/>
+    <line x1="-50" y1="-15" x2="-10" y2="-15" stroke="#4a90e2" stroke-width="7" stroke-linecap="round"/>
+    <line x1="-50" y1="0" x2="-10" y2="0" stroke="#4a90e2" stroke-width="7" stroke-linecap="round"/>
 
     <!-- Cabin/front section -->
-    <path d="M -10,-35 L 30,-35 L 40,0 L -10,0 Z" fill="none" stroke="#3b82f6" stroke-width="10" stroke-linejoin="round"/>
+    <path d="M -5,-28 L 30,-28 L 38,0 L -5,0 Z" fill="none" stroke="#4a90e2" stroke-width="7" stroke-linejoin="round"/>
 
     <!-- Windshield -->
-    <circle cx="15" cy="-20" r="12" fill="none" stroke="#003d7a" stroke-width="8"/>
+    <circle cx="15" cy="-18" r="8" fill="none" stroke="#0a1f44" stroke-width="5"/>
 
-    <!-- Horizontal line through middle -->
-    <line x1="-70" y1="15" x2="50" y2="15" stroke="#003d7a" stroke-width="12" stroke-linecap="round"/>
+    <!-- Horizontal base line through middle -->
+    <line x1="-65" y1="15" x2="50" y2="15" stroke="#0a1f44" stroke-width="8" stroke-linecap="round"/>
   </g>
 
-  <!-- Company text -->
-  <text x="200" y="360" font-family="Arial, sans-serif" font-size="56" font-weight="bold" text-anchor="middle" fill="#003d7a">SAFE HAUL</text>
-  <text x="200" y="420" font-family="Arial, sans-serif" font-size="42" font-weight="600" text-anchor="middle" fill="#3b82f6">COMPLIANCE</text>
+  <!-- Text on right side -->
+  <text x="220" y="95" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="700" fill="#0a1f44" letter-spacing="2">SAFE HAUL</text>
+  <text x="220" y="150" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="500" fill="#4a90e2" letter-spacing="6">COMPLIANCE</text>
 </svg>
