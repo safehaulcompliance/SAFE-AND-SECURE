@@ -136,17 +136,46 @@ button { font-family: inherit; }
   display: block;
 }
 
-.cursor-trail {
+/* Smoke puff from exhaust */
+.cursor-smoke {
   position: fixed; top: 0; left: 0;
   pointer-events: none;
   z-index: 9998;
-  width: 4px; height: 4px;
-  margin-left: -2px; margin-top: -2px;
+  width: 8px; height: 8px;
+  margin-left: -4px; margin-top: -4px;
   border-radius: 50%;
-  background: rgba(156, 163, 175, 0.6);
+  background: radial-gradient(circle, rgba(180, 180, 180, 0.55) 0%, rgba(180, 180, 180, 0) 70%);
   opacity: 0;
   will-change: transform, opacity;
-  filter: blur(1px);
+  filter: blur(2px);
+}
+
+/* Highway road dashes (yellow lane markers) */
+.cursor-dash {
+  position: fixed; top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9997;
+  width: 14px; height: 3px;
+  margin-left: -7px; margin-top: -1.5px;
+  border-radius: 2px;
+  background: rgba(252, 211, 77, 0.85);
+  opacity: 0;
+  will-change: transform, opacity;
+  box-shadow: 0 0 8px rgba(252, 211, 77, 0.6);
+}
+
+/* Tire dust particles */
+.cursor-dust {
+  position: fixed; top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9997;
+  width: 3px; height: 3px;
+  margin-left: -1.5px; margin-top: -1.5px;
+  border-radius: 50%;
+  background: rgba(120, 100, 80, 0.5);
+  opacity: 0;
+  will-change: transform, opacity;
+  filter: blur(0.5px);
 }
 
 .cursor-truck--active {

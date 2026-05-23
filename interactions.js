@@ -47,13 +47,31 @@
     cursorTruck.innerHTML = TRUCK_SVG;
     document.body.appendChild(cursorTruck);
 
-    // Create trail particles
-    const trails = [];
-    for (let i = 0; i < 5; i++) {
-      const trail = document.createElement('div');
-      trail.className = 'cursor-trail';
-      document.body.appendChild(trail);
-      trails.push({ el: trail, x: 0, y: 0, life: 0 });
+    // Create smoke puffs (from exhaust)
+    const smokePuffs = [];
+    for (let i = 0; i < 6; i++) {
+      const puff = document.createElement('div');
+      puff.className = 'cursor-smoke';
+      document.body.appendChild(puff);
+      smokePuffs.push({ el: puff, x: 0, y: 0, life: 0, size: 1 });
+    }
+
+    // Create highway road dashes (yellow lane markers behind truck)
+    const roadDashes = [];
+    for (let i = 0; i < 8; i++) {
+      const dash = document.createElement('div');
+      dash.className = 'cursor-dash';
+      document.body.appendChild(dash);
+      roadDashes.push({ el: dash, x: 0, y: 0, life: 0, angle: 0 });
+    }
+
+    // Create tire dust particles
+    const dustParticles = [];
+    for (let i = 0; i < 10; i++) {
+      const dust = document.createElement('div');
+      dust.className = 'cursor-dust';
+      document.body.appendChild(dust);
+      dustParticles.push({ el: dust, x: 0, y: 0, vx: 0, vy: 0, life: 0 });
     }
 
     let mouseX = window.innerWidth / 2;
@@ -61,7 +79,7 @@
     let truckX = mouseX;
     let truckY = mouseY;
     let lastMouseX = mouseX;
-    let trailIndex = 0;
+    let lastMouseY = mouseY;
 
     document.addEventListener('mousemove', function(e) {
       mouseX = e.clientX;
@@ -72,6 +90,11 @@
     let targetRotation = 0;
     let isMoving = false;
     let moveTimeout;
+    let smokeIdx = 0;
+    let dashIdx = 0;
+    let dustIdx = 0;
+    let dashSpawnCounter = 0;
+    let lastDashX = 0, lastDashY = 0;
 
     function animateCursor() {
       // Smooth truck movement with lag
@@ -80,13 +103,17 @@
 
       // Rotate truck based on movement direction (truck faces right by default)
       const dx = mouseX - lastMouseX;
+      const dy = mouseY - lastMouseY;
+      const speed = Math.sqrt(dx * dx + dy * dy);
+
       if (Math.abs(dx) > 0.5) {
-        targetRotation = dx > 0 ? 0 : 180; // 0 = facing right, 180 = facing left
+        targetRotation = dx > 0 ? 0 : 180;
         isMoving = true;
         clearTimeout(moveTimeout);
         moveTimeout = setTimeout(function() { isMoving = false; }, 100);
       }
       lastMouseX = mouseX;
+      lastMouseY = mouseY;
 
       // Smooth rotation transition
       const rotDiff = targetRotation - currentRotation;
@@ -94,26 +121,92 @@
 
       cursorTruck.style.transform = `translate(${truckX}px, ${truckY}px) rotateY(${currentRotation}deg)`;
 
-      // Drop exhaust trail particles when moving
-      if (isMoving && Math.random() > 0.6) {
-        const trail = trails[trailIndex];
-        // Position exhaust behind cab (opposite of direction)
-        const behindOffset = currentRotation > 90 ? 30 : -30;
-        trail.x = truckX + behindOffset + (Math.random() - 0.5) * 6;
-        trail.y = truckY - 12 + (Math.random() - 0.5) * 4; // Near exhaust stack height
-        trail.life = 1;
-        trail.el.style.transform = `translate(${trail.x}px, ${trail.y}px)`;
-        trail.el.style.opacity = '0.5';
-        trailIndex = (trailIndex + 1) % trails.length;
+      // ── SMOKE PUFFS from exhaust stack ──
+      if (isMoving && Math.random() > 0.45) {
+        const puff = smokePuffs[smokeIdx];
+        const facingRight = currentRotation < 90;
+        // Exhaust stack is on the cab side (right when facing right, left when facing left)
+        const stackOffset = facingRight ? 6 : -6;
+        puff.x = truckX + stackOffset + (Math.random() - 0.5) * 3;
+        puff.y = truckY - 8 + (Math.random() - 0.5) * 2;
+        puff.life = 1;
+        puff.size = 0.6 + Math.random() * 0.4;
+        puff.el.style.transform = `translate(${puff.x}px, ${puff.y}px) scale(${puff.size})`;
+        puff.el.style.opacity = '0.55';
+        smokeIdx = (smokeIdx + 1) % smokePuffs.length;
       }
 
-      // Fade out all trails (smoke dissipates upward)
-      trails.forEach(function(t) {
-        if (t.life > 0) {
-          t.life -= 0.035;
-          t.y -= 0.5; // Drift upward like smoke
-          t.el.style.transform = `translate(${t.x}px, ${t.y}px)`;
-          t.el.style.opacity = Math.max(0, t.life * 0.4);
+      // Fade and grow smoke (drifts up, expands, fades)
+      smokePuffs.forEach(function(p) {
+        if (p.life > 0) {
+          p.life -= 0.025;
+          p.y -= 0.6 + Math.random() * 0.3;
+          p.x += (Math.random() - 0.5) * 0.4;
+          p.size += 0.03;
+          p.el.style.transform = `translate(${p.x}px, ${p.y}px) scale(${p.size})`;
+          p.el.style.opacity = Math.max(0, p.life * 0.55);
+        }
+      });
+
+      // ── HIGHWAY ROAD DASHES (yellow lane markers behind truck) ──
+      if (isMoving && speed > 2) {
+        dashSpawnCounter++;
+        const distSinceLastDash = Math.sqrt(
+          Math.pow(truckX - lastDashX, 2) + Math.pow(truckY - lastDashY, 2)
+        );
+        // Spawn dashes at regular distance intervals (like real road markers)
+        if (distSinceLastDash > 26) {
+          const dash = roadDashes[dashIdx];
+          const facingRight = currentRotation < 90;
+          // Calculate angle of movement for dash orientation
+          const moveAngle = Math.atan2(dy, dx) * (180 / Math.PI);
+          // Position dash slightly behind truck on the "road"
+          const backOffset = facingRight ? -18 : 18;
+          dash.x = truckX + backOffset;
+          dash.y = truckY + 14; // Below truck (road level)
+          dash.life = 1;
+          dash.angle = moveAngle;
+          dash.el.style.transform = `translate(${dash.x}px, ${dash.y}px) rotate(${moveAngle}deg)`;
+          dash.el.style.opacity = '0.85';
+          dashIdx = (dashIdx + 1) % roadDashes.length;
+          lastDashX = truckX;
+          lastDashY = truckY;
+        }
+      }
+
+      // Fade road dashes (they stay still and fade out)
+      roadDashes.forEach(function(d) {
+        if (d.life > 0) {
+          d.life -= 0.022;
+          d.el.style.opacity = Math.max(0, d.life * 0.85);
+        }
+      });
+
+      // ── TIRE DUST (kicked up from wheels when moving fast) ──
+      if (isMoving && speed > 4 && Math.random() > 0.6) {
+        const dust = dustParticles[dustIdx];
+        const facingRight = currentRotation < 90;
+        const wheelOffset = facingRight ? -10 : 10; // Behind wheels
+        dust.x = truckX + wheelOffset + (Math.random() - 0.5) * 8;
+        dust.y = truckY + 12;
+        // Dust flies backward and up slightly
+        dust.vx = facingRight ? -0.8 - Math.random() * 0.8 : 0.8 + Math.random() * 0.8;
+        dust.vy = -0.3 - Math.random() * 0.4;
+        dust.life = 1;
+        dust.el.style.transform = `translate(${dust.x}px, ${dust.y}px)`;
+        dust.el.style.opacity = '0.5';
+        dustIdx = (dustIdx + 1) % dustParticles.length;
+      }
+
+      // Animate dust particles (move with velocity, fade)
+      dustParticles.forEach(function(d) {
+        if (d.life > 0) {
+          d.life -= 0.04;
+          d.x += d.vx;
+          d.y += d.vy;
+          d.vy += 0.05; // Gravity pulls dust back down
+          d.el.style.transform = `translate(${d.x}px, ${d.y}px)`;
+          d.el.style.opacity = Math.max(0, d.life * 0.5);
         }
       });
 
@@ -124,7 +217,9 @@
     // Hide cursor when leaving window
     document.addEventListener('mouseleave', function() {
       cursorTruck.style.opacity = '0';
-      trails.forEach(function(t) { t.el.style.opacity = '0'; });
+      smokePuffs.forEach(function(p) { p.el.style.opacity = '0'; });
+      roadDashes.forEach(function(d) { d.el.style.opacity = '0'; });
+      dustParticles.forEach(function(d) { d.el.style.opacity = '0'; });
     });
     document.addEventListener('mouseenter', function() {
       cursorTruck.style.opacity = '1';
@@ -304,7 +399,9 @@
     // ───── 11. DISABLE CUSTOM CURSOR ON TOUCH DEVICES ────────
     if ('ontouchstart' in window) {
       cursorTruck.style.display = 'none';
-      trails.forEach(function(t) { t.el.style.display = 'none'; });
+      smokePuffs.forEach(function(p) { p.el.style.display = 'none'; });
+      roadDashes.forEach(function(d) { d.el.style.display = 'none'; });
+      dustParticles.forEach(function(d) { d.el.style.display = 'none'; });
       document.body.style.cursor = '';
     }
 
