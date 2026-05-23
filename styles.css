@@ -220,48 +220,8 @@ button { font-family: inherit; }
   a, button, .btn { cursor: pointer !important; }
 }
 
-/* ── scroll progress bar at top ──────────────────────────── */
-.scroll-progress {
-  position: fixed;
-  top: 0; left: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--signal) 0%, var(--signal-2) 100%);
-  z-index: 10000;
-  width: 0%;
-  box-shadow: 0 0 12px rgba(37, 99, 235, 0.5);
-  transition: width .1s ease-out;
-}
-
-/* ── floating back-to-top button ────────────────────────── */
-.back-to-top {
-  position: fixed;
-  bottom: 32px;
-  right: 32px;
-  width: 52px; height: 52px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--signal) 0%, var(--signal-2) 100%);
-  color: #FFFFFF;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(20px) scale(0.8);
-  transition: all .35s cubic-bezier(.22,.61,.36,1);
-  z-index: 999;
-  border: none;
-  font-size: 22px;
-  font-weight: 700;
-}
-.back-to-top.visible {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0) scale(1);
-}
-.back-to-top:hover {
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 16px 40px rgba(37, 99, 235, 0.5);
-}
+/* (scroll progress bar removed) */
+/* (back-to-top button removed) */
 
 /* ── hero ken burns effect (slow zoom) ──────────────────── */
 .hero-cine-bg img,

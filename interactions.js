@@ -350,7 +350,7 @@
 
     // ───── 4. RIPPLE EFFECT ON CLICK ─────────────────────────
     function bindRipple() {
-      document.querySelectorAll('.btn, .nav-links a, .back-to-top').forEach(function(el) {
+      document.querySelectorAll('.btn, .nav-links a').forEach(function(el) {
         if (el.dataset.rippleBound) return;
         el.dataset.rippleBound = 'true';
         el.addEventListener('click', function(e) {
@@ -367,43 +367,9 @@
       });
     }
 
-    // ───── 5. SCROLL PROGRESS BAR ────────────────────────────
-    const progressBar = document.createElement('div');
-    progressBar.className = 'scroll-progress';
-    document.body.appendChild(progressBar);
-
-    function updateScrollProgress() {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = (scrollTop / docHeight) * 100;
-      progressBar.style.width = progress + '%';
-    }
-
-    // ───── 6. BACK TO TOP BUTTON ─────────────────────────────
-    const backToTop = document.createElement('button');
-    backToTop.className = 'back-to-top';
-    backToTop.setAttribute('aria-label', 'Back to top');
-    backToTop.innerHTML = '↑';
-    document.body.appendChild(backToTop);
-
-    backToTop.addEventListener('click', function() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    function toggleBackToTop() {
-      if (window.pageYOffset > 600) {
-        backToTop.classList.add('visible');
-      } else {
-        backToTop.classList.remove('visible');
-      }
-    }
-
+    // ───── 5. (scroll progress bar removed) ──────────────────
+    // ───── 6. (back-to-top button removed) ───────────────────
     // ───── 7. SCROLL EVENTS ──────────────────────────────────
-    let scrollTimeout;
-    window.addEventListener('scroll', function() {
-      updateScrollProgress();
-      toggleBackToTop();
-    }, { passive: true });
 
     // ───── 8. INTERSECTION OBSERVER FOR REVEALS ──────────────
     function bindScrollReveals() {
@@ -459,10 +425,6 @@
       attempts++;
       if (attempts >= 5) clearInterval(interval);
     }, 1200);
-
-    // Initial scroll state
-    updateScrollProgress();
-    toggleBackToTop();
 
     // ───── 11. DISABLE CUSTOM CURSOR ON TOUCH DEVICES ────────
     if ('ontouchstart' in window) {
