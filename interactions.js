@@ -10,31 +10,95 @@
     else document.addEventListener('DOMContentLoaded', fn);
   }
 
-  // Truck SVG icon (matches brand colors)
+  // Premium American semi-truck silhouette (Peterbilt-inspired)
   const TRUCK_SVG = `
-    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <linearGradient id="truckGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#FFFFFF"/>
+          <stop offset="100%" stop-color="#E5E7EB"/>
+        </linearGradient>
+        <linearGradient id="cabGrad" x1="0%" y1="0%" x2="0%" y2="100%">
           <stop offset="0%" stop-color="#2563EB"/>
           <stop offset="100%" stop-color="#1E40AF"/>
         </linearGradient>
+        <linearGradient id="windowGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#BFDBFE"/>
+          <stop offset="100%" stop-color="#3B82F6"/>
+        </linearGradient>
+        <filter id="truckShadow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="1.5"/>
+          <feOffset dx="0" dy="2"/>
+          <feComponentTransfer><feFuncA type="linear" slope="0.3"/></feComponentTransfer>
+          <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
       </defs>
-      <!-- Trailer body -->
-      <rect x="4" y="20" width="34" height="22" rx="2" fill="url(#truckGrad)" stroke="#0A1F44" stroke-width="1.5"/>
-      <!-- Cabin -->
-      <path d="M 38 26 L 50 26 L 56 36 L 56 42 L 38 42 Z" fill="url(#truckGrad)" stroke="#0A1F44" stroke-width="1.5" stroke-linejoin="round"/>
-      <!-- Windshield -->
-      <rect x="42" y="29" width="9" height="6" rx="1" fill="#E0EBFA"/>
-      <!-- Wheels -->
-      <circle cx="14" cy="46" r="5" fill="#0A1F44"/>
-      <circle cx="14" cy="46" r="2" fill="#4A90E2"/>
-      <circle cx="28" cy="46" r="5" fill="#0A1F44"/>
-      <circle cx="28" cy="46" r="2" fill="#4A90E2"/>
-      <circle cx="48" cy="46" r="5" fill="#0A1F44"/>
-      <circle cx="48" cy="46" r="2" fill="#4A90E2"/>
-      <!-- Trailer detail lines -->
-      <line x1="10" y1="26" x2="34" y2="26" stroke="#FFFFFF" stroke-width="0.8" opacity="0.5"/>
-      <line x1="10" y1="32" x2="34" y2="32" stroke="#FFFFFF" stroke-width="0.8" opacity="0.5"/>
+
+      <g filter="url(#truckShadow)">
+        <!-- Trailer (53-foot dry van — boxy clean rectangle) -->
+        <rect x="2" y="12" width="44" height="26" rx="1.5" fill="url(#bodyGrad)" stroke="#0A1F44" stroke-width="0.8"/>
+        <!-- Trailer subtle horizontal accent line -->
+        <line x1="4" y1="22" x2="44" y2="22" stroke="#9CA3AF" stroke-width="0.4" opacity="0.6"/>
+        <line x1="4" y1="30" x2="44" y2="30" stroke="#9CA3AF" stroke-width="0.4" opacity="0.6"/>
+        <!-- Mud flap at trailer rear -->
+        <rect x="2" y="38" width="2" height="4" fill="#0A1F44"/>
+
+        <!-- Cab gap -->
+        <rect x="46" y="14" width="2" height="24" fill="#0A1F44"/>
+
+        <!-- Cab (American long-nose / Peterbilt style) -->
+        <path d="M 48 16 L 60 16 L 62 18 L 62 26 L 70 26 L 74 30 L 74 38 L 48 38 Z"
+              fill="url(#cabGrad)" stroke="#0A1F44" stroke-width="0.8" stroke-linejoin="round"/>
+
+        <!-- Hood/engine bay (sloped front of American truck) -->
+        <path d="M 62 26 L 70 26 L 70 32 L 62 32 Z" fill="url(#cabGrad)" stroke="#0A1F44" stroke-width="0.6"/>
+
+        <!-- Windshield (split with center divider — classic American style) -->
+        <path d="M 50 18 L 60 18 L 62 22 L 50 22 Z" fill="url(#windowGrad)" stroke="#0A1F44" stroke-width="0.5"/>
+        <line x1="55" y1="18" x2="55.5" y2="22" stroke="#0A1F44" stroke-width="0.4"/>
+
+        <!-- Side door window -->
+        <rect x="50" y="24" width="6" height="6" rx="0.5" fill="url(#windowGrad)" stroke="#0A1F44" stroke-width="0.4"/>
+
+        <!-- Chrome grille -->
+        <rect x="70.5" y="28" width="3.5" height="4" fill="#9CA3AF"/>
+        <line x1="70.5" y1="29.5" x2="74" y2="29.5" stroke="#0A1F44" stroke-width="0.3"/>
+        <line x1="70.5" y1="31" x2="74" y2="31" stroke="#0A1F44" stroke-width="0.3"/>
+
+        <!-- Headlight -->
+        <circle cx="73" cy="34" r="1.2" fill="#FCD34D" stroke="#0A1F44" stroke-width="0.4"/>
+
+        <!-- Exhaust stack (iconic vertical chrome pipe) -->
+        <rect x="49" y="6" width="1.8" height="12" rx="0.5" fill="#9CA3AF" stroke="#0A1F44" stroke-width="0.3"/>
+        <ellipse cx="49.9" cy="6" rx="1" ry="0.6" fill="#6B7280"/>
+
+        <!-- Front bumper -->
+        <rect x="69" y="36" width="6" height="2" rx="0.5" fill="#9CA3AF" stroke="#0A1F44" stroke-width="0.3"/>
+
+        <!-- Wheels (3 sets — trailer tandem + cab tandem + steer) -->
+        <!-- Trailer tandem axles -->
+        <circle cx="10" cy="40" r="5" fill="#0A1F44"/>
+        <circle cx="10" cy="40" r="2.5" fill="#374151"/>
+        <circle cx="10" cy="40" r="1" fill="#9CA3AF"/>
+
+        <circle cx="20" cy="40" r="5" fill="#0A1F44"/>
+        <circle cx="20" cy="40" r="2.5" fill="#374151"/>
+        <circle cx="20" cy="40" r="1" fill="#9CA3AF"/>
+
+        <!-- Cab tandem -->
+        <circle cx="52" cy="40" r="5" fill="#0A1F44"/>
+        <circle cx="52" cy="40" r="2.5" fill="#374151"/>
+        <circle cx="52" cy="40" r="1" fill="#9CA3AF"/>
+
+        <circle cx="61" cy="40" r="5" fill="#0A1F44"/>
+        <circle cx="61" cy="40" r="2.5" fill="#374151"/>
+        <circle cx="61" cy="40" r="1" fill="#9CA3AF"/>
+
+        <!-- Steer axle -->
+        <circle cx="71" cy="40" r="4.5" fill="#0A1F44"/>
+        <circle cx="71" cy="40" r="2.2" fill="#374151"/>
+        <circle cx="71" cy="40" r="0.9" fill="#9CA3AF"/>
+      </g>
     </svg>
   `;
 
@@ -67,39 +131,52 @@
       mouseY = e.clientY;
     });
 
+    let currentRotation = 0;
+    let targetRotation = 0;
+    let isMoving = false;
+    let moveTimeout;
+
     function animateCursor() {
       // Smooth truck movement with lag
       truckX += (mouseX - truckX) * 0.18;
       truckY += (mouseY - truckY) * 0.18;
 
-      // Rotate truck based on movement direction
+      // Rotate truck based on movement direction (truck faces right by default)
       const dx = mouseX - lastMouseX;
-      let rotation = 0;
-      if (Math.abs(dx) > 1) {
-        rotation = dx > 0 ? 0 : 180; // Face direction of movement
-      } else {
-        rotation = 0;
+      if (Math.abs(dx) > 0.5) {
+        targetRotation = dx > 0 ? 0 : 180; // 0 = facing right, 180 = facing left
+        isMoving = true;
+        clearTimeout(moveTimeout);
+        moveTimeout = setTimeout(function() { isMoving = false; }, 100);
       }
       lastMouseX = mouseX;
 
-      cursorTruck.style.transform = `translate(${truckX}px, ${truckY}px) rotateY(${rotation}deg)`;
+      // Smooth rotation transition
+      const rotDiff = targetRotation - currentRotation;
+      currentRotation += rotDiff * 0.2;
 
-      // Drop trail particles occasionally
-      if (Math.random() > 0.7) {
+      cursorTruck.style.transform = `translate(${truckX}px, ${truckY}px) rotateY(${currentRotation}deg)`;
+
+      // Drop exhaust trail particles when moving
+      if (isMoving && Math.random() > 0.6) {
         const trail = trails[trailIndex];
-        trail.x = truckX + (Math.random() - 0.5) * 8;
-        trail.y = truckY + 15 + Math.random() * 5; // Behind truck (below it)
+        // Position exhaust behind cab (opposite of direction)
+        const behindOffset = currentRotation > 90 ? 30 : -30;
+        trail.x = truckX + behindOffset + (Math.random() - 0.5) * 6;
+        trail.y = truckY - 12 + (Math.random() - 0.5) * 4; // Near exhaust stack height
         trail.life = 1;
         trail.el.style.transform = `translate(${trail.x}px, ${trail.y}px)`;
-        trail.el.style.opacity = '0.7';
+        trail.el.style.opacity = '0.5';
         trailIndex = (trailIndex + 1) % trails.length;
       }
 
-      // Fade out all trails
+      // Fade out all trails (smoke dissipates upward)
       trails.forEach(function(t) {
         if (t.life > 0) {
-          t.life -= 0.04;
-          t.el.style.opacity = Math.max(0, t.life * 0.5);
+          t.life -= 0.035;
+          t.y -= 0.5; // Drift upward like smoke
+          t.el.style.transform = `translate(${t.x}px, ${t.y}px)`;
+          t.el.style.opacity = Math.max(0, t.life * 0.4);
         }
       });
 
