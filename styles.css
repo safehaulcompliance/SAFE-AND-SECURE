@@ -1,23 +1,23 @@
 /* Safe & Secure — design tokens + base (v2) */
 
 :root {
-  /* cinematic dark palette — deep midnight + electric accent */
-  --paper:    #0A0E1A;        /* deep dark base */
-  --paper-2:  #141B2D;        /* card surfaces */
-  --paper-3:  #1C2540;        /* elevated surfaces */
-  --ink:      #FFFFFF;        /* primary text */
-  --ink-2:    #C7CFDB;        /* secondary text */
-  --mute:     #8892A6;        /* muted text */
-  --mute-2:   #5C6680;        /* subtle text */
-  --rule:     #1F2940;        /* borders */
-  --rule-soft:#1A2236;        /* soft dividers */
+  /* modern professional palette — clean white + deep navy + blue accent */
+  --paper:    #FAFBFC;        /* very light bg */
+  --paper-2:  #FFFFFF;        /* card surfaces */
+  --paper-3:  #F2F4F7;        /* elevated surfaces */
+  --ink:      #0A1F44;        /* primary text — deep navy */
+  --ink-2:    #2B3A5E;        /* secondary text */
+  --mute:     #4B5563;        /* muted text - darker for contrast */
+  --mute-2:   #6B7280;        /* subtle text */
+  --rule:     #E5E7EB;        /* borders */
+  --rule-soft:#EEF0F3;        /* soft dividers */
 
-  /* accent system — electric blue + gold */
-  --steel:    #1A3464;
-  --steel-2:  #2B4E8C;
-  --signal:   #4A90E2;        /* electric blue — primary CTA */
-  --signal-2: #6BA5E8;
-  --highway:  #FFC857;        /* warm golden glow */
+  /* accent system — modern blue + accent */
+  --steel:    #0A1F44;
+  --steel-2:  #1A3464;
+  --signal:   #2563EB;        /* vibrant blue — primary CTA */
+  --signal-2: #1E40AF;
+  --highway:  #2563EB;
   --safe:     #10B981;
   --safe-2:   #059669;
   --ember:    #EF4444;
@@ -71,8 +71,67 @@ body {
   font-weight: 400;
 }
 
-a { color: inherit; text-decoration: none; }
+a { color: inherit; text-decoration: none; cursor: pointer; }
 button { font-family: inherit; cursor: pointer; }
+
+/* ── satisfying micro-interactions ─────────────────────── */
+
+/* Interactive elements get a pointer cursor with smooth transitions */
+a, button, .btn, .service, .value, .run-step, [role="button"] {
+  cursor: pointer;
+  transition: transform .3s cubic-bezier(.22,.61,.36,1), color .25s ease, opacity .25s ease;
+}
+
+/* Footer links lift slightly on hover */
+.foot-col a {
+  display: inline-block;
+  transition: transform .25s cubic-bezier(.22,.61,.36,1), color .2s ease;
+}
+.foot-col a:hover {
+  color: var(--signal);
+  transform: translateX(3px);
+}
+
+/* Value cards glow softly on hover */
+.value {
+  transition: transform .35s cubic-bezier(.22,.61,.36,1), box-shadow .35s ease, border-color .35s ease;
+}
+.value:hover {
+  transform: translateY(-3px);
+}
+
+/* Run step rows lift on hover */
+.run-step:hover {
+  transform: translateX(4px);
+}
+
+/* Form inputs subtle focus glow */
+input, select, textarea {
+  transition: border-color .25s ease, box-shadow .25s ease, transform .15s ease;
+}
+input:focus, select:focus, textarea:focus {
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  outline: none;
+}
+
+/* Logo subtle scale on hover */
+.nav-brand {
+  transition: transform .3s cubic-bezier(.22,.61,.36,1);
+}
+.nav-brand:hover {
+  transform: scale(1.02);
+}
+
+/* Arrow icons pulse forward on hover */
+.btn:hover .arrow {
+  transform: translateX(3px);
+}
+
+/* Subtle text link hover */
+.lede a, p a, footer a {
+  position: relative;
+  transition: color .2s ease;
+}
 
 /* ── grain texture removed for modern clean look ─────────── */
 .grain::before { display: none; }
@@ -515,10 +574,10 @@ hr.rule-soft { border:0; height:1px; background: var(--rule-soft); margin:0; }
 /* ── nav ───────────────────────────────────────────────── */
 .nav {
   position: sticky; top: 0; z-index: 50;
-  background: rgba(10, 14, 26, 0.7);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(10, 31, 68, 0.08);
 }
 .nav-row {
   display: flex; align-items: center; justify-content: space-between;
@@ -547,10 +606,10 @@ hr.rule-soft { border:0; height:1px; background: var(--rule-soft); margin:0; }
 }
 .nav-links {
   display: flex; gap: 4px;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(10, 31, 68, 0.04);
   padding: 6px;
   border-radius: 100px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(10, 31, 68, 0.08);
   backdrop-filter: blur(10px);
 }
 .nav-links a {
@@ -560,12 +619,14 @@ hr.rule-soft { border:0; height:1px; background: var(--rule-soft); margin:0; }
   color: var(--ink-2);
   padding: 8px 18px;
   border-radius: 100px;
-  transition: all .25s ease;
+  transition: all .25s cubic-bezier(.22,.61,.36,1);
   position: relative;
+  cursor: pointer;
 }
 .nav-links a:hover {
-  color: var(--ink);
-  background: rgba(255, 255, 255, 0.1);
+  color: var(--paper-2);
+  background: var(--ink);
+  transform: translateY(-1px);
 }
 .nav-links a.active {
   background: var(--signal);
@@ -1001,7 +1062,8 @@ hr.rule-soft { border:0; height:1px; background: var(--rule-soft); margin:0; }
   font-size: clamp(32px, 4.5vw, 48px); letter-spacing: -0.02em; line-height: 1.1;
 }
 .sec-head h2 em { font-family: var(--f-sans); font-style: normal; font-weight: 500; }
-.sec-head .lede { color: var(--ink-2); font-size: 18px; line-height: 1.7; max-width: 50ch; }
+.sec-head .lede { color: var(--ink-2); font-size: 18px; line-height: 1.7; max-width: 50ch; font-weight: 400; opacity: 1; }
+.lede { color: var(--ink-2) !important; }
 
 /* ── services grid ─────────────────────────────────────── */
 .services { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; border-top: none; }
@@ -1012,23 +1074,26 @@ hr.rule-soft { border:0; height:1px; background: var(--rule-soft); margin:0; }
   padding: 32px 28px 36px;
   position: relative; min-height: 320px;
   display: flex; flex-direction: column; justify-content: space-between;
-  background: linear-gradient(180deg, var(--paper-2) 0%, var(--paper) 100%);
-  transition: background .4s ease, transform .4s cubic-bezier(.22,.61,.36,1), box-shadow .4s ease, border-color .4s ease;
+  background: #FFFFFF;
+  transition: transform .4s cubic-bezier(.22,.61,.36,1), box-shadow .4s ease, border-color .4s ease;
 }
 .service:hover {
-  transform: translateY(-4px);
-  border-color: rgba(74, 144, 226, 0.4);
-  box-shadow: 0 20px 60px rgba(74, 144, 226, 0.15);
+  transform: translateY(-6px);
+  border-color: var(--signal);
+  box-shadow: 0 20px 50px rgba(37, 99, 235, 0.15);
 }
-.service::before {
-  content:""; position: absolute; inset: 0;
-  background: var(--ink);
-  opacity: 0;
-  transition: opacity .6s ease;
-  z-index: 0;
-  pointer-events: none;
+.service h3.svc-title {
+  color: var(--ink) !important;
+  font-weight: 700;
+  font-size: 22px;
+  margin: 0 0 12px 0;
 }
-.service:hover { transform: translateY(-4px); box-shadow: 0 12px 32px -16px rgba(10, 21, 37, 0.18); background: #F5EFDB; }
+.service .svc-blurb {
+  color: var(--mute) !important;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.service::before { display: none; }
 .service > * { position: relative; z-index: 1; }
 .service:hover .svc-arrow { transform: translateX(4px); color: var(--signal); transition: transform .5s ease, color .5s ease; }
 .service:nth-child(3n) { border-right: 0; }
