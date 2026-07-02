@@ -247,10 +247,11 @@ function Nav() {
         <div className="nav-links">
           <a href="#services">Services</a>
           <a href="#expertise">Expertise</a>
+          <a href="#audit">Audit score</a>
           <a href="#contact">Contact</a>
         </div>
         <div className="nav-cta">
-          <a className="btn btn--signal" href="#contact">Free fleet audit <Arrow/></a>
+          <a className="btn btn--signal" href="#audit">Free fleet audit <Arrow/></a>
         </div>
       </div>
     </nav>
@@ -294,7 +295,7 @@ function Hero() {
         </p>
 
         <div className="hero-cine-cta reveal" data-d="5">
-          <a className="btn btn--signal" href="#contact">Get a free check-up <Arrow/></a>
+          <a className="btn btn--signal" href="#audit">Get a free check-up <Arrow/></a>
           <a className="btn btn--ghost-light" href="#services">See how we help</a>
         </div>
 
@@ -992,6 +993,514 @@ function Clients() {
 }
 
 /* ────────────────────────────────────────────────────────── */
+/* Fleet Audit — FMCSA audit readiness score                   */
+/* Interactive self-assessment: 5 weighted categories,         */
+/* 20 questions, CFR citations, penalty exposure, fix plan.    */
+/* ────────────────────────────────────────────────────────── */
+const AUDIT_CATEGORIES = [
+  {
+    id: "authority", name: "Operating Authority", icon: "📜", weight: 0.10,
+    description: "Registration, insurance, and authority documents are the baseline for any motor carrier. Lapses trigger automatic deactivation.",
+    questions: [
+      { id: "auth_1",
+        text: "FMCSA registration is active: USDOT number is not deactivated, MC authority is not revoked",
+        cfr: "49 CFR 390.19", penalty: "Prohibited from operating; vehicle OOS",
+        recommendation: "Check your USDOT/MC status at safer.fmcsa.dot.gov. FMCSA deactivates USDOT numbers without warning if the biennial MCS-150 update is missed. If deactivated, you cannot legally operate until reactivated, which can take days to weeks." },
+      { id: "auth_2",
+        text: "MCS-150 biennial update has been completed within the required 2-year window",
+        cfr: "49 CFR 390.19(b)", penalty: "USDOT deactivated without notice",
+        recommendation: "File your MCS-150 update at the FMCSA portal. Your due date is based on your USDOT number — the last two digits determine your month. Missing the window results in automatic deactivation with no notice. Set a calendar reminder 60 days before your due date." },
+      { id: "auth_3",
+        text: "Proof of minimum required liability insurance (and/or cargo insurance) is current and on file",
+        cfr: "49 CFR 387", penalty: "Authority revoked; vehicle OOS",
+        recommendation: "Minimum liability: $750K for general freight, $1M for household goods/oil, $5M for hazmat. Insurance must be filed by your insurer directly with FMCSA via Form MCS-90 endorsement. A lapse in filed insurance triggers automatic authority revocation. Keep a copy of your current certificate on file." },
+    ],
+  },
+  {
+    id: "maintenance", name: "Vehicle Maintenance", icon: "🔧", weight: 0.15,
+    description: "Vehicle maintenance records demonstrate that trucks are inspected, defects are repaired, and the carrier has a systematic maintenance program.",
+    questions: [
+      { id: "maint_1",
+        text: "Driver Vehicle Inspection Reports (DVIRs) are collected after each trip and retained for 90 days",
+        cfr: "49 CFR 396.11", penalty: "Up to $16,550/violation; driver OOS if defect not certified repaired",
+        recommendation: "Drivers must prepare a DVIR at the end of every day they operate a CMV, even if no defects are found — the “no defects” DVIR is still required. DVIRs with defects must be reviewed and signed by a mechanic after repair, and again by the next driver. Retain all DVIRs for 90 days." },
+      { id: "maint_2",
+        text: "A systematic maintenance file exists for each vehicle (repairs, inspections, maintenance history)",
+        cfr: "49 CFR 396.3", penalty: "Up to $16,550/violation",
+        recommendation: "Each vehicle must have a file containing: identification (VIN, make, year, license), maintenance schedule, all inspection/repair records, and copies of periodic inspection reports. This file must be retained for the period of operation plus 1 year after the vehicle leaves the fleet." },
+      { id: "maint_3",
+        text: "Annual vehicle inspections are performed and inspection reports are retained for 14 months",
+        cfr: "49 CFR 396.17", penalty: "Vehicle OOS + up to $16,550",
+        recommendation: "Each CMV must pass an annual inspection performed by a qualified inspector. The inspection report must be retained for 14 months, and the current report (or a copy) must be kept in the vehicle. An out-of-date annual inspection means the vehicle is placed out-of-service immediately." },
+    ],
+  },
+  {
+    id: "hos", name: "Hours of Service / ELD", icon: "⏱️", weight: 0.20,
+    description: "ELD mandate compliance and HOS recordkeeping are checked in every audit. Missing records trigger CSA violations across multiple categories.",
+    questions: [
+      { id: "hos_1",
+        text: "All drivers subject to the ELD mandate use FMCSA-registered ELDs (or have documented exemptions)",
+        cfr: "49 CFR 395.8(a)(1)", penalty: "OOS + up to $16,550/violation",
+        recommendation: "Verify your ELD is on the FMCSA's registered device list at fmcsa.dot.gov. If any drivers qualify for an exemption (short-haul, pre-2000 engine, etc.), document the exemption basis in each driver's file. Paper RODS are only acceptable if the ELD malfunctions and you follow the malfunction protocol." },
+      { id: "hos_2",
+        text: "HOS records/ELD data are retained for at least 6 months",
+        cfr: "49 CFR 395.8(k)", penalty: "Up to $16,550/violation",
+        recommendation: "ELD data must be retained for 6 months. Paper logs (where applicable) must be retained for 6 months. Supporting documents (fuel receipts, toll records, bills of lading) that verify HOS must also be retained for 6 months." },
+      { id: "hos_3",
+        text: "Drivers have received HOS training and understand their personal obligations",
+        cfr: "49 CFR 395", penalty: "HOS violations increase CSA score; fines up to $16,550",
+        recommendation: "Drivers are personally responsible for HOS compliance, but carriers are also liable when they knowingly allow violations. Document HOS training, have a written policy, and conduct regular reviews of ELD records to catch patterns before an audit does." },
+      { id: "hos_4",
+        text: "Your ELD malfunction procedure is documented and drivers know what to do when an ELD fails",
+        cfr: "49 CFR 395.34", penalty: "OOS if no compliant records during malfunction period",
+        recommendation: "When an ELD malfunctions, drivers must: note the malfunction on the record, notify the carrier within 24 hours, reconstruct paper logs for the current and prior 7 days, and use paper logs until the ELD is repaired (max 8 days). Keep a written malfunction protocol and blank paper log forms in every truck." },
+    ],
+  },
+  {
+    id: "drug", name: "Drug & Alcohol Testing", icon: "🧪", weight: 0.25,
+    description: "FMCSA Part 382 requires a comprehensive drug and alcohol program: written policy, pre-employment testing, random pool, and complete records.",
+    questions: [
+      { id: "drug_1",
+        text: "A written drug and alcohol testing policy exists and has been provided to all drivers",
+        cfr: "49 CFR 382.601", penalty: "Up to $16,550/violation",
+        recommendation: "The written policy must explain testing types, substances tested for, consequences of violations, and driver rights. It must be provided to each driver before their first assignment and to new drivers at hire." },
+      { id: "drug_2",
+        text: "Pre-employment drug test results are on file for every currently employed driver",
+        cfr: "49 CFR 382.301", penalty: "Up to $16,550 + driver OOS",
+        recommendation: "A negative pre-employment drug test result must be received before a driver performs any safety-sensitive function. Keep the MRO-verified result in the driver's confidential drug/alcohol file (separate from the DQF)." },
+      { id: "drug_3",
+        text: "Your random testing pool is maintained at required minimum rates (50% for drugs, 10% for alcohol)",
+        cfr: "49 CFR 382.305", penalty: "Up to $16,550/violation",
+        recommendation: "Random selection must be truly random (scientifically valid method) and spread throughout the year. A consortium/TPA can help ensure proper pool management. Document all random selections, notifications, and test completions." },
+      { id: "drug_4",
+        text: "All drug and alcohol test records are retained in a secure, confidential file separate from the DQF",
+        cfr: "49 CFR 382.401", penalty: "Up to $16,550/violation",
+        recommendation: "Drug/alcohol records must be in a separate, locked file accessible only to authorized personnel. Retention: positive results 5 years, negative/cancelled results 1 year, annual summaries 5 years." },
+      { id: "drug_5",
+        text: "Return-to-duty and follow-up testing documentation is on file for any driver with a prior violation",
+        cfr: "49 CFR 382.309/605", penalty: "Up to $16,550 + driver prohibited from operating",
+        recommendation: "Any driver who tested positive or refused a test must complete a SAP evaluation, a negative return-to-duty test, and a follow-up testing program before operating again. Document each step: the SAP referral, RTD test result, and all follow-up test dates and results." },
+    ],
+  },
+  {
+    id: "dqf", name: "Driver Qualification Files", icon: "📋", weight: 0.30,
+    description: "DQF completeness is the #1 finding in FMCSA audits. Every driver must have a complete file before operating.",
+    questions: [
+      { id: "dqf_1",
+        text: "Every driver has a completed employment application (10-year history) on file before operating",
+        cfr: "49 CFR 391.21", penalty: "Up to $16,550/violation",
+        recommendation: "Collect completed FMCSA-compliant applications before allowing any driver to operate. The application must cover 10 years of employment history, all states licensed in, and all accidents/violations." },
+      { id: "dqf_2",
+        text: "Current DOT medical certificates are on file for all drivers (no expired certs)",
+        cfr: "49 CFR 391.43", penalty: "Immediate OOS + up to $16,550",
+        recommendation: "Medical certificates expire every 24 months (or sooner if the examiner specifies). Set calendar reminders 60 days before each expiration. An expired medical cert means the driver is out-of-service immediately." },
+      { id: "dqf_3",
+        text: "Annual MVR reviews are conducted and documented within 12 months for every driver",
+        cfr: "49 CFR 391.25", penalty: "Up to $16,550/violation",
+        recommendation: "Pull the MVR from every state each driver holds a license in, review it against FMCSA disqualification standards, and sign a certification. This must happen every 12 calendar months — not annually from hire date." },
+      { id: "dqf_4",
+        text: "Annual Certificates of Violations are collected from every driver and reviewed",
+        cfr: "49 CFR 391.27", penalty: "Up to $16,550/violation",
+        recommendation: "Each driver must certify all violations (or none) received in the prior 12 months. You must review and sign an acknowledgment. These must be retained for the duration of employment plus 3 years." },
+      { id: "dqf_5",
+        text: "Drug & Alcohol Clearinghouse queries (pre-employment full + annual limited) are documented for all drivers",
+        cfr: "49 CFR 382.701", penalty: "Up to $16,550 + driver prohibited from operating",
+        recommendation: "Run a full Clearinghouse query before a driver's first day (requires driver consent). Run limited annual queries for all currently employed CDL drivers each calendar year. Document query dates and results." },
+    ],
+  },
+];
+
+/* per-answer max penalty exposure (2026 FMCSA schedule, 49 CFR 386) */
+const AUDIT_PENALTY = { no: 16550, unsure: 12413, partial: 8275 };
+const AUDIT_EXPOSURE_CAP = 500000;
+
+function auditQuestionsFor(cat, mode) {
+  return mode === "quick" ? cat.questions.slice(0, 1) : cat.questions;
+}
+
+function auditScore(answers, mode) {
+  const byCategory = {};
+  let total = 0;
+  for (const cat of AUDIT_CATEGORIES) {
+    const qs = auditQuestionsFor(cat, mode);
+    let pts = 0;
+    for (const q of qs) {
+      const a = answers[q.id];
+      if (a === "yes") pts += 1;
+      else if (a === "partial") pts += 0.5;
+    }
+    const pct = qs.length ? (pts / qs.length) * 100 : 0;
+    byCategory[cat.id] = Math.round(pct);
+    total += pct * cat.weight;
+  }
+  return { total: Math.round(total), byCategory };
+}
+
+function auditBand(score) {
+  if (score >= 90) return { label: "Audit Ready", tone: "ok",
+    description: "Your compliance documentation is in strong shape. Keep maintaining expiration tracking and annual reviews." };
+  if (score >= 75) return { label: "Minor Gaps", tone: "info",
+    description: "A few areas need attention. Address the gaps below before your next compliance review." };
+  if (score >= 60) return { label: "Significant Gaps", tone: "warn",
+    description: "Multiple compliance gaps exist. An FMCSA audit right now would likely find violations. Prioritize the items below." };
+  if (score >= 40) return { label: "High Risk", tone: "hot",
+    description: "Serious compliance deficiencies exist. You are at elevated risk of an unsatisfactory FMCSA safety rating. Act now." };
+  return { label: "Immediate Action Required", tone: "crit",
+    description: "Critical compliance gaps could result in OOS orders, large fines, or an unsatisfactory safety rating. This requires immediate attention." };
+}
+
+const AUDIT_ANSWERS = [
+  { v: "yes",     glyph: "✓", label: "Yes" },
+  { v: "partial", glyph: "~",      label: "Partial" },
+  { v: "no",      glyph: "✗", label: "No" },
+  { v: "unsure",  glyph: "?",      label: "Not Sure" },
+];
+
+function AuditTool() {
+  // step: 0 = intro · 1..N = category index · N+1 = results
+  const [mode, setMode] = useState("full");
+  const [step, setStep] = useState(0);
+  const [qIdx, setQIdx] = useState(0);
+  const [answers, setAnswers] = useState({});
+  const [flash, setFlash] = useState(null);           // question id briefly highlighted on answer
+  const [email, setEmail] = useState("");
+  const [emailStatus, setEmailStatus] = useState("idle"); // idle | loading | done | error
+  const rootRef = useRef(null);
+  const timerRef = useRef(null);
+
+  const nCats = AUDIT_CATEGORIES.length;
+  const totalQs = AUDIT_CATEGORIES.reduce((a, c) => a + auditQuestionsFor(c, mode).length, 0);
+  const answeredQs = AUDIT_CATEGORIES.reduce((a, c) =>
+    a + auditQuestionsFor(c, mode).filter(q => answers[q.id] !== undefined).length, 0);
+
+  const gapExposure = Math.min(
+    Object.values(answers).reduce((a, v) => a + (AUDIT_PENALTY[v] || 0), 0),
+    AUDIT_EXPOSURE_CAP
+  );
+
+  useEffect(() => () => clearTimeout(timerRef.current), []);
+
+  function scrollTop() {
+    if (rootRef.current) {
+      const y = rootRef.current.getBoundingClientRect().top + window.scrollY - 110;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  }
+
+  function start(m) {
+    setMode(m);
+    setAnswers({});
+    setEmailStatus("idle");
+    setStep(1);
+    setQIdx(0);
+    scrollTop();
+  }
+
+  function answer(qid, val) {
+    setAnswers(prev => ({ ...prev, [qid]: val }));
+    setFlash(qid);
+    clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => {
+      setFlash(null);
+      const cat = AUDIT_CATEGORIES[step - 1];
+      const qs = auditQuestionsFor(cat, mode);
+      if (qIdx < qs.length - 1) {
+        setQIdx(qIdx + 1);
+      } else if (step < nCats) {
+        setStep(step + 1);
+        setQIdx(0);
+        scrollTop();
+      } else {
+        setStep(nCats + 1);
+        scrollTop();
+      }
+    }, 350);
+  }
+
+  function back() {
+    clearTimeout(timerRef.current);
+    setFlash(null);
+    if (qIdx > 0) { setQIdx(qIdx - 1); return; }
+    if (step > 1) {
+      const prevCat = AUDIT_CATEGORIES[step - 2];
+      setStep(step - 1);
+      setQIdx(auditQuestionsFor(prevCat, mode).length - 1);
+    } else {
+      setStep(0);
+      setQIdx(0);
+    }
+  }
+
+  function upgradeToFull() {
+    setMode("full");
+    // jump to the first unanswered question of the full audit
+    for (let c = 0; c < nCats; c++) {
+      const qs = AUDIT_CATEGORIES[c].questions;
+      const i = qs.findIndex(q => answers[q.id] === undefined);
+      if (i !== -1) { setStep(c + 1); setQIdx(i); scrollTop(); return; }
+    }
+    setStep(nCats + 1);
+  }
+
+  async function sendFixPlan(e) {
+    e.preventDefault();
+    if (emailStatus === "loading" || emailStatus === "done" || !email.includes("@")) return;
+    setEmailStatus("loading");
+    const r = auditScore(answers, mode);
+    const band = auditBand(r.total);
+    const gaps = AUDIT_CATEGORIES.flatMap(c =>
+      auditQuestionsFor(c, mode)
+        .filter(q => answers[q.id] !== "yes")
+        .map(q => `[${c.name}] ${q.text} (${q.cfr}) — answered: ${answers[q.id] || "unanswered"}`)
+    );
+    const data = new FormData();
+    data.append("_subject", "FMCSA audit score — fix plan request — safehaulcompliance.com");
+    data.append("_template", "table");
+    data.append("_captcha", "false");
+    data.append("email", email);
+    data.append("score", `${r.total}/100 — ${band.label}`);
+    data.append("mode", mode === "quick" ? "Quick check (5 questions)" : "Full audit (20 questions)");
+    data.append("max_exposure", `$${gapExposure.toLocaleString()}`);
+    data.append("category_scores", AUDIT_CATEGORIES.map(c => `${c.name}: ${r.byCategory[c.id]}/100`).join(" · "));
+    data.append("gaps", gaps.length ? gaps.join("\n") : "None — all clear");
+    data.append("_autoresponse",
+      `Thanks for running the Safe Haul FMCSA audit readiness check. Your score: ${r.total}/100 (${band.label}). ` +
+      "A compliance specialist will email your full CFR-cited fix plan within 24 hours. " +
+      "Need it faster? Call +1 350-200-0085.");
+    try {
+      const res = await fetch("https://formsubmit.co/ajax/info@safehaulcompliance.com", {
+        method: "POST", headers: { "Accept": "application/json" }, body: data,
+      });
+      if (!res.ok) throw new Error("network");
+      setEmailStatus("done");
+    } catch {
+      setEmailStatus("error");
+    }
+  }
+
+  /* ── intro ─────────────────────────────────────────────── */
+  const intro = (
+    <div className="au-intro">
+      <div className="au-eyebrow"><span className="au-live-dot"></span> FMCSA Audit Readiness</div>
+      <h2 className="au-h1">Would your fleet pass an <em>FMCSA audit</em> today?</h2>
+      <p className="au-sub">
+        Get a personalized readiness score with CFR citations, dollar penalties, and a
+        prioritized fix plan. Free. No signup to see the score.
+      </p>
+      <div className="au-modes">
+        <button className="au-mode au-mode--primary" onClick={() => start("quick")}>
+          <span className="au-mode-tag">Quick Check</span>
+          <span className="au-mode-title">Start in 60 seconds</span>
+          <span className="au-mode-desc">5 questions, one per category. Get a fast directional score.</span>
+          <span className="au-mode-go">Start Quick <Arrow/></span>
+        </button>
+        <button className="au-mode" onClick={() => start("full")}>
+          <span className="au-mode-tag">Full Audit</span>
+          <span className="au-mode-title">3-minute audit</span>
+          <span className="au-mode-desc">20 questions across all 5 categories. The complete gap report.</span>
+          <span className="au-mode-go">Start Full <Arrow/></span>
+        </button>
+      </div>
+      <div className="au-trust">
+        <span>Free</span><i>·</i><span>No signup to see the score</span><i>·</i><span>No credit card</span>
+      </div>
+      <div className="au-cat-strip">
+        {AUDIT_CATEGORIES.map(c => (
+          <span key={c.id} className="au-cat-chip">
+            <span className="au-cat-ico">{c.icon}</span> {c.name}
+            <b>{Math.round(c.weight * 100)}%</b>
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+
+  /* ── question flow ─────────────────────────────────────── */
+  let flow = null;
+  if (step >= 1 && step <= nCats) {
+    const cat = AUDIT_CATEGORIES[step - 1];
+    const qs = auditQuestionsFor(cat, mode);
+    const q = qs[qIdx];
+    flow = (
+      <div className="au-flow">
+        <div className="au-topbar">
+          <span className="au-pill"><span className="au-live-dot"></span> Free Audit Readiness</span>
+          <div className="au-progress">
+            <span className="mono">{answeredQs} of {totalQs}</span>
+            <span className="au-bar"><span style={{ width: `${(answeredQs / totalQs) * 100}%` }}></span></span>
+          </div>
+        </div>
+
+        <div className="au-exposure">
+          <span className="au-exp-lbl"><span className="au-exp-dot"></span> Max FMCSA Exposure</span>
+          <span className="au-exp-num mono">${gapExposure.toLocaleString()}</span>
+          <span className="au-exp-note">{gapExposure > 0 ? "from gaps so far" : "climbs with each “no”"}</span>
+        </div>
+
+        <div className="au-card" key={`${cat.id}-${q.id}`}>
+          <div className="au-card-head">
+            <span className="au-card-ico">{cat.icon}</span>
+            <h3>{cat.name}</h3>
+            <span className="au-weight">{Math.round(cat.weight * 100)}%</span>
+            <span className="au-dots">
+              {AUDIT_CATEGORIES.map((c, i) => (
+                <span key={c.id} className={`au-dot${i === step - 1 ? " on" : ""}${i < step - 1 ? " done" : ""}`}></span>
+              ))}
+            </span>
+          </div>
+          <p className="au-card-desc">{cat.description}</p>
+          <div className="au-q">
+            <div className="au-q-count mono">QUESTION {qIdx + 1} <span>OF {qs.length}</span></div>
+            <div className="au-q-row">
+              <span className="au-q-num mono">{qIdx + 1}</span>
+              <p className="au-q-text">{q.text}</p>
+            </div>
+            <div className="au-q-meta">
+              <span className="au-cfr mono">&sect; {q.cfr.replace(/^49 CFR /, "49 CFR ")}</span>
+              <span className="au-penalty mono">&#9888; {q.penalty}</span>
+            </div>
+            <div className="au-answers">
+              {AUDIT_ANSWERS.map(a => (
+                <button key={a.v}
+                  className={`au-ans au-ans--${a.v}${answers[q.id] === a.v ? " picked" : ""}${flash === q.id && answers[q.id] === a.v ? " flash" : ""}`}
+                  onClick={() => answer(q.id, a.v)}>
+                  <i>{a.glyph}</i> {a.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <button className="au-back" onClick={back}>&larr; Back</button>
+      </div>
+    );
+  }
+
+  /* ── results ───────────────────────────────────────────── */
+  let results = null;
+  if (step === nCats + 1) {
+    const r = auditScore(answers, mode);
+    const band = auditBand(r.total);
+    const cats = [...AUDIT_CATEGORIES].sort((a, b) => r.byCategory[a.id] - r.byCategory[b.id]);
+    const gaps = cats.flatMap(c =>
+      auditQuestionsFor(c, mode)
+        .filter(q => answers[q.id] !== "yes")
+        .map(q => ({ ...q, cat: c, given: answers[q.id] || "unanswered" }))
+    );
+    results = (
+      <div className="au-report">
+        <div className="au-rep-head">
+          <h3 className="au-h1" style={{ fontSize: "clamp(26px,3.4vw,40px)" }}>FMCSA Audit Readiness Report</h3>
+          <p className="au-sub">Based on your answers across {totalQs} compliance checkpoints</p>
+        </div>
+
+        <div className="au-scorecard">
+          <div className="au-score mono">{r.total}<span>/100</span></div>
+          <div className={`au-band au-band--${band.tone}`}>{band.label}</div>
+          <p className="au-band-desc">{band.description}</p>
+        </div>
+
+        <div className="au-breakdown">
+          <div className="au-sec-lbl mono">Category breakdown &middot; weakest first</div>
+          {cats.map(c => {
+            const v = r.byCategory[c.id];
+            const nGaps = auditQuestionsFor(c, mode).filter(q => answers[q.id] !== "yes").length;
+            return (
+              <div className="au-bd-row" key={c.id}>
+                <span className="au-bd-name">{c.icon} {c.name}</span>
+                <span className="au-bd-gaps">{nGaps === 0 ? "all clear" : `${nGaps} gap${nGaps === 1 ? "" : "s"} to close`}</span>
+                <span className="au-bd-bar"><span className={`t-${v < 40 ? "crit" : v < 60 ? "hot" : v < 80 ? "warn" : "ok"}`} style={{ width: `${Math.max(v, 3)}%` }}></span></span>
+                <span className={`au-bd-val mono t-${v < 40 ? "crit" : v < 60 ? "hot" : v < 80 ? "warn" : "ok"}`}>{v}<i>/100</i></span>
+              </div>
+            );
+          })}
+        </div>
+
+        {gaps.length > 0 && (
+          <div className="au-exp-banner">
+            <span className="au-exp-lbl"><span className="au-exp-dot"></span> Max FMCSA Exposure</span>
+            <span className="au-exp-num mono">${gapExposure.toLocaleString()}</span>
+            <span className="au-exp-note">{gaps.length} gap{gaps.length === 1 ? "" : "s"} &middot; at up to $16,550 per violation (49 CFR 386)</span>
+          </div>
+        )}
+
+        {gaps.length > 0 && (
+          <div className="au-fixplan">
+            <div className="au-sec-lbl mono">Your fix plan &middot; start at the top</div>
+            {gaps.map((g, i) => (
+              <details className="au-gap" key={g.id} open={i < 2}>
+                <summary>
+                  <span className="au-gap-num mono">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="au-gap-text">{g.text}</span>
+                  <span className={`au-gap-ans au-gap-ans--${g.given}`}>{g.given === "unsure" ? "not sure" : g.given}</span>
+                </summary>
+                <div className="au-gap-body">
+                  <div className="au-q-meta">
+                    <span className="au-cfr mono">&sect; {g.cfr}</span>
+                    <span className="au-penalty mono">&#9888; {g.penalty}</span>
+                  </div>
+                  <p>{g.recommendation}</p>
+                </div>
+              </details>
+            ))}
+          </div>
+        )}
+
+        <div className="au-cta-grid">
+          <div className="au-cta-card au-cta-card--main">
+            <div className="au-sec-lbl mono">Want it fixed for you?</div>
+            <h4>Let Safe Haul close {gaps.length > 0 ? `all ${gaps.length} gap${gaps.length === 1 ? "" : "s"}` : "the loop"} — free fleet audit, 48-hour turnaround.</h4>
+            <p>A real compliance specialist reviews your files, confirms every gap above, and hands you a signed one-page memo with a flat-rate plan. No retainers.</p>
+            <a className="btn btn--signal" href="#contact">Get my free fleet audit <Arrow/></a>
+          </div>
+          <div className="au-cta-card">
+            <div className="au-sec-lbl mono">Email me this report</div>
+            {emailStatus === "done" ? (
+              <p className="au-email-done">&#10003; Sent — check your inbox. Your full CFR-cited fix plan follows within 24 hours.</p>
+            ) : (
+              <>
+                <p>Get your score, every gap with its CFR citation, and the full fix plan in your inbox.</p>
+                <form className="au-email-row" onSubmit={sendFixPlan}>
+                  <input type="email" required placeholder="you@yourcompany.com"
+                    value={email} onChange={e => setEmail(e.target.value)}/>
+                  <button type="submit" disabled={emailStatus === "loading"}>
+                    {emailStatus === "loading" ? "Sending…" : "Email my fix plan"}
+                  </button>
+                </form>
+                {emailStatus === "error" && (
+                  <p className="au-email-err">Couldn&rsquo;t send — email us at info@safehaulcompliance.com</p>
+                )}
+              </>
+            )}
+          </div>
+        </div>
+
+        <div className="au-rep-foot">
+          {mode === "quick" && (
+            <button className="au-link" onClick={upgradeToFull}>
+              &#9889; Quick Check estimate &middot; run the full 20-question audit for the complete gap list &rarr;
+            </button>
+          )}
+          <button className="au-link" onClick={() => { setStep(0); setQIdx(0); setAnswers({}); setEmailStatus("idle"); scrollTop(); }}>
+            Retake the audit
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <section className="audit shell" id="audit" ref={rootRef}>
+      <div className="au-panel reveal">
+        {step === 0 && intro}
+        {flow}
+        {results}
+      </div>
+    </section>
+  );
+}
+
+/* ────────────────────────────────────────────────────────── */
 /* Contact                                                     */
 /* ────────────────────────────────────────────────────────── */
 function Contact() {
@@ -1158,6 +1667,26 @@ function Contact() {
 }
 
 /* ────────────────────────────────────────────────────────── */
+/* WhatsApp floating button                                    */
+/* ────────────────────────────────────────────────────────── */
+function WhatsAppFab() {
+  return (
+    <a
+      className="wa-fab"
+      href="https://wa.me/918198075620?text=Hello%20Safe%20Haul%20Compliance%2C%20I%20need%20assistance%20with%20my%20trucking%20compliance."
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Chat with us on WhatsApp"
+    >
+      <svg viewBox="0 0 448 512" fill="currentColor" aria-hidden="true">
+        <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+      </svg>
+      <span className="wa-fab-label">Chat on WhatsApp</span>
+    </a>
+  );
+}
+
+/* ────────────────────────────────────────────────────────── */
 /* Footer                                                      */
 /* ────────────────────────────────────────────────────────── */
 function Footer() {
@@ -1238,8 +1767,10 @@ function App() {
       <Expertise/>
       <Values/>
       <Clients/>
+      <AuditTool/>
       <Contact/>
       <Footer/>
+      <WhatsAppFab/>
 
       <TweaksPanel title="Tweaks">
         <TweakSection label="Palette"/>
