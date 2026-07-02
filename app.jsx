@@ -957,7 +957,7 @@ function Contact() {
             <hr className="rule-soft"/>
             <div className="cm-row">
               <span className="k">Office</span>
-              <span className="v">Mississauga, Ontario, Canada</span>
+              <span className="v">Near Post Office, Sujanpur<br/>Pathankot, Punjab 145023, India</span>
               <span className="x">By appointment</span>
             </div>
           </div>
@@ -1080,7 +1080,7 @@ function Footer() {
             <h5>Reach us</h5>
             <a href="tel:3502000085">350-200-0085</a>
             <a href="mailto:info@safehaulcompliance.com">info@safehaulcompliance.com</a>
-            <a>Mississauga, Ontario</a>
+            <a>Sujanpur, Pathankot, Punjab, India</a>
           </div>
           <div className="foot-col">
             <h5>Legal</h5>
