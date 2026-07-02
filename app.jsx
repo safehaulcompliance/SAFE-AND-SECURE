@@ -247,7 +247,6 @@ function Nav() {
         <div className="nav-links">
           <a href="#services">Services</a>
           <a href="#expertise">Expertise</a>
-          <a href="#audit">Audit score</a>
           <a href="#contact">Contact</a>
         </div>
         <div className="nav-cta">
@@ -1209,7 +1208,6 @@ function AuditTool() {
       } else if (step < nCats) {
         setStep(step + 1);
         setQIdx(0);
-        scrollTop();
       } else {
         setStep(nCats + 1);
         scrollTop();
@@ -1390,7 +1388,7 @@ function AuditTool() {
     results = (
       <div className="au-report">
         <div className="au-rep-head">
-          <h3 className="au-h1" style={{ fontSize: "clamp(26px,3.4vw,40px)" }}>FMCSA Audit Readiness Report</h3>
+          <h3 className="au-rep-title">FMCSA Audit Readiness Report</h3>
           <p className="au-sub">Based on your answers across {totalQs} compliance checkpoints</p>
         </div>
 
