@@ -940,12 +940,6 @@ function Contact() {
         <div className="reveal">
           <div className="contact-meta">
             <div className="cm-row">
-              <span className="k">Phone</span>
-              <span className="v">350-200-0085</span>
-              <span className="x">Mon – Fri</span>
-            </div>
-            <hr className="rule-soft"/>
-            <div className="cm-row">
               <span className="k">Email</span>
               <span className="v">info@safehaulcompliance.com</span>
               <span className="x">We reply quickly</span>
@@ -957,14 +951,17 @@ function Contact() {
                 <div className="cm-loc">
                   <span className="cm-loc-tag">Canada · HQ</span>
                   <span className="cm-loc-addr">22 Wintercress Circle<br/>Brampton, ON L6R 2K2, Canada</span>
+                  <a className="cm-loc-tel" href="tel:+19052267726">+1 905-226-7726</a>
                 </div>
                 <div className="cm-loc">
                   <span className="cm-loc-tag">USA · HQ</span>
                   <span className="cm-loc-addr">2200 W Meeker St, Apt X320<br/>Kent, WA, USA</span>
+                  <a className="cm-loc-tel" href="tel:+13502000085">+1 350-200-0085</a>
                 </div>
                 <div className="cm-loc">
                   <span className="cm-loc-tag">India · Support</span>
                   <span className="cm-loc-addr">Near Post Office, Sujanpur<br/>Pathankot, Punjab 145023, India</span>
+                  <a className="cm-loc-tel" href="tel:+918198075620">+91 81980 75620</a>
                 </div>
               </div>
               <span className="x">By appointment</span>
@@ -1087,14 +1084,13 @@ function Footer() {
           </div>
           <div className="foot-col">
             <h5>Reach us</h5>
-            <a href="tel:3502000085">350-200-0085</a>
             <a href="mailto:info@safehaulcompliance.com">info@safehaulcompliance.com</a>
           </div>
           <div className="foot-col">
             <h5>Offices</h5>
-            <div className="foot-loc"><b>Canada · HQ</b>22 Wintercress Circle, Brampton, ON L6R 2K2</div>
-            <div className="foot-loc"><b>USA · HQ</b>2200 W Meeker St, Apt X320, Kent, WA</div>
-            <div className="foot-loc"><b>India · Support</b>Sujanpur, Pathankot, Punjab 145023</div>
+            <div className="foot-loc"><b>Canada · HQ</b>22 Wintercress Circle, Brampton, ON L6R 2K2<a href="tel:+19052267726">+1 905-226-7726</a></div>
+            <div className="foot-loc"><b>USA · HQ</b>2200 W Meeker St, Apt X320, Kent, WA<a href="tel:+13502000085">+1 350-200-0085</a></div>
+            <div className="foot-loc"><b>India · Support</b>Sujanpur, Pathankot, Punjab 145023<a href="tel:+918198075620">+91 81980 75620</a></div>
           </div>
           <div className="foot-col">
             <h5>Legal</h5>
