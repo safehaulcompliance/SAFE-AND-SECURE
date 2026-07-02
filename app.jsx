@@ -860,7 +860,7 @@ function Contact() {
     setSendError("");
     const data = new FormData(e.currentTarget);
     try {
-      const res = await fetch("https://formsubmit.co/ajax/manjeetsaini85@gmail.com", {
+      const res = await fetch("https://formsubmit.co/ajax/info@safehaulcompliance.com", {
         method: "POST",
         headers: { "Accept": "application/json" },
         body: data,

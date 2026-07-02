@@ -78,113 +78,7 @@ body {
 a { color: inherit; text-decoration: none; }
 button { font-family: inherit; }
 
-/* ── truck cursor follower ────────────────────────────── */
-@media (hover: hover) and (pointer: fine) {
-  /* Hide native cursor on EVERYTHING — truck handles it */
-  html, body, *, *::before, *::after {
-    cursor: none !important;
-  }
-}
-
-.cursor-truck {
-  position: fixed; top: 0; left: 0;
-  pointer-events: none;
-  z-index: 9999;
-  width: 32px; height: 22px;
-  margin-left: -16px; margin-top: -11px;
-  will-change: transform;
-  transition: opacity .25s ease, width .3s cubic-bezier(.22,.61,.36,1), height .3s cubic-bezier(.22,.61,.36,1), filter .25s ease;
-  filter: drop-shadow(0 3px 8px rgba(37, 99, 235, 0.35));
-}
-
-.cursor-truck svg {
-  width: 100%; height: 100%;
-  display: block;
-}
-
-/* Smoke puff from exhaust — bigger and more visible */
-.cursor-smoke {
-  position: fixed; top: 0; left: 0;
-  pointer-events: none;
-  z-index: 9998;
-  width: 14px; height: 14px;
-  margin-left: -7px; margin-top: -7px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(150, 150, 160, 0.7) 0%, rgba(150, 150, 160, 0.2) 50%, rgba(150, 150, 160, 0) 80%);
-  opacity: 0;
-  will-change: transform, opacity;
-  filter: blur(3px);
-}
-
-/* Tire dust particles */
-.cursor-dust {
-  position: fixed; top: 0; left: 0;
-  pointer-events: none;
-  z-index: 9997;
-  width: 3px; height: 3px;
-  margin-left: -1.5px; margin-top: -1.5px;
-  border-radius: 50%;
-  background: rgba(120, 100, 80, 0.5);
-  opacity: 0;
-  will-change: transform, opacity;
-  filter: blur(0.5px);
-}
-
-/* Crash spark particles */
-.cursor-spark {
-  position: fixed; top: 0; left: 0;
-  pointer-events: none;
-  z-index: 10000;
-  width: 5px; height: 5px;
-  margin-left: -2.5px; margin-top: -2.5px;
-  border-radius: 50%;
-  background: #FCD34D;
-  opacity: 0;
-  will-change: transform, opacity;
-  box-shadow: 0 0 8px rgba(252, 211, 77, 0.9), 0 0 16px rgba(239, 68, 68, 0.6);
-}
-
-/* Impact burst (POW circle) */
-.cursor-burst {
-  position: fixed; top: 0; left: 0;
-  pointer-events: none;
-  z-index: 10000;
-  width: 60px; height: 60px;
-  margin-left: -30px; margin-top: -30px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(252, 211, 77, 0.6) 0%, rgba(239, 68, 68, 0.3) 40%, transparent 70%);
-  opacity: 0;
-  transform: scale(0);
-  will-change: transform, opacity;
-}
-
-/* BAM text */
-.cursor-bam {
-  position: fixed; top: 0; left: 0;
-  pointer-events: none;
-  z-index: 10001;
-  font-family: 'Impact', 'Arial Black', sans-serif;
-  font-size: 22px;
-  font-weight: 900;
-  color: #FCD34D;
-  text-shadow: 2px 2px 0 #EF4444, -1px -1px 0 #0A1F44, 1px -1px 0 #0A1F44, -1px 1px 0 #0A1F44, 0 0 12px rgba(252, 211, 77, 0.8);
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(0);
-  will-change: transform, opacity;
-  letter-spacing: 1px;
-}
-
-.cursor-truck--active {
-  width: 42px; height: 29px;
-  margin-left: -21px; margin-top: -14px;
-  filter: drop-shadow(0 5px 14px rgba(37, 99, 235, 0.5));
-}
-
-@media (max-width: 768px), (pointer: coarse) {
-  .cursor-truck, .cursor-trail { display: none !important; }
-  body { cursor: auto !important; }
-  a, button, .btn { cursor: pointer !important; }
-}
+/* (custom truck cursor & crash effect removed — native cursor restored) */
 
 /* (scroll progress bar removed) */
 /* (back-to-top button removed) */
@@ -237,11 +131,7 @@ html { scroll-behavior: smooth; }
 }
 
 .hero-cine-cta .btn--signal {
-  animation: subtle-pulse 3s ease-in-out infinite;
-}
-@keyframes subtle-pulse {
-  0%, 100% { box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25); }
-  50% { box-shadow: 0 12px 32px rgba(37, 99, 235, 0.45); }
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
 }
 
 /* ── ripple effect ────────────────────────────────────── */
