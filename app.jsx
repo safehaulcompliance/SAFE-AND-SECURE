@@ -239,8 +239,14 @@ function Nav() {
   return (
     <nav className="nav">
       <div className="shell nav-row">
-        <a className="nav-brand" href="#top">
-          <img src="logo.svg" alt="Safe Haul Compliance" className="nav-logo"/>
+        <a className="nav-brand" href="#top" aria-label="Safe Haul Compliance">
+          <span className="nav-mark">
+            <img src="logo-mark.png" alt="" className="nav-logo"/>
+          </span>
+          <span className="nav-word">
+            <b>Safe Haul</b>
+            <span>Compliance</span>
+          </span>
         </a>
         <div className="nav-links">
           <a href="#services">Services</a>

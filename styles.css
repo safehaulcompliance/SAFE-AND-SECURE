@@ -759,12 +759,40 @@ hr.rule-soft { border:0; height:1px; background: var(--rule-soft); margin:0; }
   height: 96px;
 }
 .nav-brand {
-  display:flex; align-items:center; gap: 10px;
+  display:flex; align-items:center; gap: 12px;
   font-weight: 500; letter-spacing: -0.01em; font-size: 16px;
 }
 .nav-logo {
-  height: 72px; width: auto; max-height: 90px;
+  height: 40px; width: auto; display: block;
   object-fit: contain;
+}
+/* White chip behind the emblem while the nav is dark (over hero); drops
+   away once the nav turns to white glass on scroll */
+.nav-mark {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 7px 10px; border-radius: 14px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 2px 12px rgba(10, 31, 68, 0.18);
+  transition: background .35s ease, padding .35s ease, box-shadow .35s ease;
+}
+.nav.nav-scrolled .nav-mark {
+  background: transparent; padding: 0; box-shadow: none;
+}
+.nav-word { display: flex; flex-direction: column; line-height: 1.05; }
+.nav-word b {
+  font-family: var(--f-sans); font-weight: 700; font-size: 17px;
+  letter-spacing: -0.01em; color: #FFFFFF;
+}
+.nav-word span {
+  font-family: var(--f-mono); font-size: 9.5px; letter-spacing: .2em;
+  text-transform: uppercase; margin-top: 3px; color: rgba(255, 255, 255, 0.72);
+}
+.nav.nav-scrolled .nav-word b { color: var(--ink); }
+.nav.nav-scrolled .nav-word span { color: var(--ink-2); }
+@media (max-width: 520px) {
+  .nav-word span { display: none; }
+  .nav-word b { font-size: 15px; }
+  .nav-logo { height: 34px; }
 }
 .brand-mark {
   width: 30px; height: 30px;
