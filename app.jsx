@@ -956,7 +956,7 @@ function Contact() {
               <div className="cm-locs">
                 <div className="cm-loc">
                   <span className="cm-loc-tag">Canada · HQ</span>
-                  <span className="cm-loc-addr">3068 Barrydowne Road<br/>Sudbury, Ontario, Canada</span>
+                  <span className="cm-loc-addr">22 Wintercress Circle<br/>Brampton, ON L6R 2K2, Canada</span>
                 </div>
                 <div className="cm-loc">
                   <span className="cm-loc-tag">USA · HQ</span>
@@ -1092,7 +1092,7 @@ function Footer() {
           </div>
           <div className="foot-col">
             <h5>Offices</h5>
-            <div className="foot-loc"><b>Canada · HQ</b>3068 Barrydowne Road, Sudbury, Ontario</div>
+            <div className="foot-loc"><b>Canada · HQ</b>22 Wintercress Circle, Brampton, ON L6R 2K2</div>
             <div className="foot-loc"><b>USA · HQ</b>2200 W Meeker St, Apt X320, Kent, WA</div>
             <div className="foot-loc"><b>India · Support</b>Sujanpur, Pathankot, Punjab 145023</div>
           </div>
