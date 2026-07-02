@@ -1246,6 +1246,97 @@ hr.rule-soft { border:0; height:1px; background: var(--rule-soft); margin:0; }
 .marquee .star { color: var(--signal); font-size: 22px; font-family: var(--f-sans); font-style: normal; }
 @keyframes scroll { from { transform: translateX(0) } to { transform: translateX(-50%) } }
 
+/* ── clients marquee (carriers we serve) ───────────────── */
+.clients {
+  padding: 88px 0 96px;
+  background: var(--paper);
+  border-top: 1px solid var(--rule-soft);
+}
+.clients .clients-head {
+  max-width: 56ch;
+  margin: 0 0 40px;
+}
+.clients-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--f-mono); font-size: 11px; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--ink-2); margin-bottom: 14px;
+}
+.clients-eyebrow .blip {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--signal); display: inline-block;
+  animation: blip 1.4s infinite;
+}
+.clients .clients-head h2 {
+  margin: 0 0 14px; font-family: var(--f-sans); font-weight: 700;
+  font-size: clamp(30px, 4vw, 46px); letter-spacing: -0.02em; line-height: 1.1;
+}
+.clients .clients-head h2 em { font-style: normal; font-weight: 500; color: var(--signal); }
+
+.clients-marquee {
+  position: relative;
+  overflow: hidden;
+  padding: 8px 0;
+  -webkit-mask-image: none;
+}
+.clients-track {
+  display: flex;
+  width: max-content;
+  animation: clientScroll 42s linear infinite;
+  will-change: transform;
+}
+.clients-marquee:hover .clients-track { animation-play-state: paused; }
+
+.clients-row {
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+  padding-right: 20px;
+}
+.client-pill {
+  display: inline-flex; align-items: center; gap: 12px;
+  white-space: nowrap;
+  padding: 16px 26px;
+  border: 1px solid var(--rule-soft);
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(10px) saturate(160%);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+  box-shadow: 0 4px 16px rgba(31, 38, 135, 0.05);
+}
+.client-pill .cp-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--signal); flex: none;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+.client-pill .cp-name {
+  font-family: var(--f-sans); font-weight: 600; font-size: 20px;
+  color: var(--ink); letter-spacing: -0.01em;
+}
+.client-pill .cp-region {
+  font-family: var(--f-mono); font-size: 10px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--mute);
+  padding: 4px 10px; border-radius: 100px;
+  border: 1px solid var(--rule-soft); background: rgba(0,0,0,0.02);
+}
+
+/* edge fades so pills slide in/out smoothly */
+.clients-fade {
+  position: absolute; top: 0; bottom: 0; width: 12%;
+  pointer-events: none; z-index: 2;
+}
+.clients-fade--l { left: 0;  background: linear-gradient(90deg, var(--paper), transparent); }
+.clients-fade--r { right: 0; background: linear-gradient(270deg, var(--paper), transparent); }
+
+@keyframes clientScroll { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+
+@media (prefers-reduced-motion: reduce) {
+  .clients-track { animation: none; flex-wrap: wrap; }
+}
+@media (max-width: 680px) {
+  .client-pill .cp-name { font-size: 17px; }
+  .client-pill { padding: 13px 20px; }
+}
+
 /* ── section heading ───────────────────────────────────── */
 .sec { padding-top: 96px; padding-bottom: 100px; }
 .sec-head {

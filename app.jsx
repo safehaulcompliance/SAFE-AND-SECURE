@@ -846,6 +846,55 @@ function Numbers() {
 }
 
 /* ────────────────────────────────────────────────────────── */
+/* Clients — sliding marquee of carriers we serve              */
+/* ────────────────────────────────────────────────────────── */
+function Clients() {
+  const clients = [
+    { name: "Webley Express Inc.",   region: "Canada-Wide" },
+    { name: "Hawks Transportation",  region: "Canada-Wide" },
+    { name: "Redwood Freight Lines", region: "USA" },
+    { name: "Summit Carriers",       region: "USA" },
+    { name: "Ironhorse Logistics",   region: "USA" },
+    { name: "Blue Ridge Trucking",   region: "USA" },
+    { name: "Lone Star Haulers",     region: "USA" },
+  ];
+  const Row = ({ ariaHidden }) => (
+    <div className="clients-row" aria-hidden={ariaHidden ? "true" : undefined}>
+      {clients.map((c, i) => (
+        <span className="client-pill" key={i}>
+          <span className="cp-dot"></span>
+          <span className="cp-name">{c.name}</span>
+          <span className="cp-region">{c.region}</span>
+        </span>
+      ))}
+    </div>
+  );
+  return (
+    <section className="clients" id="clients">
+      <div className="shell">
+        <div className="clients-head reveal">
+          <span className="clients-eyebrow"><span className="blip"></span>Trusted on the road</span>
+          <h2 className="line-up"><Line>The carriers we <em>serve</em>.</Line></h2>
+          <p className="lede">
+            From owner-operators to Canada-wide fleets, these are some of the carriers
+            we keep compliant and audit-ready — across the USA and Canada.
+          </p>
+        </div>
+      </div>
+
+      <div className="clients-marquee" aria-label="Customers we serve">
+        <div className="clients-track">
+          <Row/>
+          <Row ariaHidden/>
+        </div>
+        <div className="clients-fade clients-fade--l" aria-hidden></div>
+        <div className="clients-fade clients-fade--r" aria-hidden></div>
+      </div>
+    </section>
+  );
+}
+
+/* ────────────────────────────────────────────────────────── */
 /* Contact                                                     */
 /* ────────────────────────────────────────────────────────── */
 function Contact() {
@@ -1076,6 +1125,7 @@ function App() {
       <Services/>
       <TheRun/>
       <Values/>
+      <Clients/>
       <Contact/>
       <Footer/>
 
