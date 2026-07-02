@@ -246,7 +246,7 @@ function Nav() {
         </a>
         <div className="nav-links">
           <a href="#services">Services</a>
-          <a href="#values">Expertise</a>
+          <a href="#expertise">Expertise</a>
           <a href="#contact">Contact</a>
         </div>
         <div className="nav-cta">
@@ -781,6 +781,72 @@ function CaseStudy() {
 }
 
 /* ────────────────────────────────────────────────────────── */
+/* Expertise — who leads the work                              */
+/* ────────────────────────────────────────────────────────── */
+function Expertise() {
+  const creds = [
+    { h: "MC Authority",  p: "New authority setups, reinstatements, and BOC-3 filings — done right the first time." },
+    { h: "Audit defense", p: "DOT and facility audits prepared, attended, and answered with clean files to show." },
+    { h: "IFTA, IRP & permits", p: "Fuel tax and registrations filed on schedule, in every jurisdiction you run." },
+    { h: "Driver files",  p: "DQ files, medical cards, and clearinghouse queries kept current for every seat." },
+  ];
+  return (
+    <section className="sec shell expertise" id="expertise">
+      <div className="sec-head">
+        <div className="reveal">
+          <span className="label">Expertise</span>
+          <h2 className="line-up"><Line>Experience you can</Line><Line>put a <em>name</em> to.</Line></h2>
+        </div>
+        <p className="lede reveal" data-d="2">
+          Safe Haul Compliance is led by Rishi — twelve years in trucking compliance
+          and safety. When you call, you talk to the person who signs the work,
+          not a call center.
+        </p>
+      </div>
+
+      <div className="exp-grid">
+        <div className="exp-panel reveal">
+          <span className="label">Who you work with</span>
+          <div className="exp-num"><Counter to={12} duration={1.6}/><span className="unit">years</span></div>
+          <div className="exp-num-cap">in trucking compliance &amp; safety</div>
+          <div className="exp-rows">
+            <div className="exp-row"><span className="k">Fleets served</span><span className="v">540+</span></div>
+            <div className="exp-row"><span className="k">Coverage</span><span className="v">USA &amp; Canada</span></div>
+            <div className="exp-row"><span className="k">Your contact</span><span className="v">Always the same</span></div>
+          </div>
+        </div>
+
+        <div className="exp-body reveal-x" data-d="2">
+          <div className="exp-byline">
+            <span className="exp-name">Rishi</span>
+            <span className="exp-role">Founder · Lead Compliance Advisor</span>
+          </div>
+          <p className="exp-bio">
+            Twelve years of new authorities, DOT audits, fuel-tax filings, and driver
+            files — for owner-operators up to fleets of a hundred-plus trucks. Rishi
+            has sat across the table from auditors and knows what they look for,
+            because he&rsquo;s spent his career preparing the files they read.
+            Every account here is handled under his review.
+          </p>
+          <blockquote className="exp-quote">
+            Compliance isn&rsquo;t paperwork. It&rsquo;s whether your trucks keep earning
+            when an auditor, an officer, or an insurer starts asking questions.
+          </blockquote>
+          <div className="exp-creds">
+            {creds.map((c, i) => (
+              <div className="exp-cred" key={i}>
+                <h5>{c.h}</h5>
+                <p>{c.p}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ────────────────────────────────────────────────────────── */
 /* Values                                                      */
 /* ────────────────────────────────────────────────────────── */
 function Values() {
@@ -1140,6 +1206,7 @@ function App() {
       <Hero/>
       <Services/>
       <TheRun/>
+      <Expertise/>
       <Values/>
       <Clients/>
       <Contact/>
