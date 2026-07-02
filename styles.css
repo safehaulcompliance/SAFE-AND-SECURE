@@ -36,7 +36,7 @@
 html, body { margin: 0; padding: 0; }
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px;
+  scroll-padding-top: 120px; /* fixed nav is 96px tall — keep anchor targets clear of it */
   -webkit-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -1755,26 +1755,31 @@ hr.rule-soft { border:0; height:1px; background: var(--rule-soft); margin:0; }
 }
 
 /* ── values ────────────────────────────────────────────── */
-.values { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid var(--ink); }
+.values { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 .value {
-  padding: 28px 24px;
-  border-right: 1px solid var(--ink);
-  border-bottom: 1px solid var(--ink);
-  min-height: 280px;
-  display: flex; flex-direction: column; justify-content: space-between;
-  background: var(--paper-2);
+  min-height: 240px;
+  display: flex; flex-direction: column; justify-content: space-between; gap: 26px;
 }
-.value:last-child { border-right: 0; }
-.value .glyph {
-  font-family: var(--f-sans); font-weight: 300;
-  font-size: 96px; line-height: 1; color: var(--signal);
-  letter-spacing: -0.06em;
+.value-top { display: flex; align-items: center; justify-content: space-between; }
+.v-icon {
+  width: 48px; height: 48px; border-radius: 14px;
+  display: grid; place-items: center;
+  color: var(--signal);
+  background: color-mix(in srgb, var(--signal) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--signal) 24%, transparent);
+  transition: transform .35s cubic-bezier(.22,.61,.36,1);
+}
+.v-icon svg { width: 24px; height: 24px; }
+.value:hover .v-icon { transform: scale(1.06); }
+.v-idx {
+  font-family: var(--f-mono); font-size: 11px; letter-spacing: .16em;
+  color: var(--mute);
 }
 .value h4 {
   margin: 0; font-family: var(--f-sans); font-weight: 700;
   font-size: 20px; letter-spacing: -0.01em;
 }
-.value p { margin: 6px 0 0; font-size: 14px; color: var(--ink-2); line-height: 1.5; }
+.value p { margin: 8px 0 0; font-size: 14px; color: var(--ink-2); line-height: 1.6; }
 
 /* ── numbers band ──────────────────────────────────────── */
 .numbers {
@@ -1905,7 +1910,6 @@ hr.rule-soft { border:0; height:1px; background: var(--rule-soft); margin:0; }
   .desk-grid { grid-template-columns: 1fr 1fr; }
   .desk-card:nth-child(3) { grid-column: 1/-1; }
   .values { grid-template-columns: 1fr 1fr; }
-  .value:nth-child(2n) { border-right: 0; }
   .numbers-grid { grid-template-columns: 1fr 1fr; }
   .ld-grid { grid-template-columns: 1fr; }
   .case-grid { grid-template-columns: 1fr; }
@@ -1925,7 +1929,6 @@ hr.rule-soft { border:0; height:1px; background: var(--rule-soft); margin:0; }
   .desk-grid { grid-template-columns: 1fr; }
   .desk-card:nth-child(3) { grid-column: auto; }
   .values { grid-template-columns: 1fr; }
-  .value { border-right: 0; }
   .numbers-grid { grid-template-columns: 1fr; }
   .road-bottom { grid-template-columns: 1fr 1fr; }
   .foot-top { grid-template-columns: 1fr; }

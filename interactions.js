@@ -80,11 +80,17 @@
         link.dataset.scrollBound = 'true';
         link.addEventListener('click', function(e) {
           const href = link.getAttribute('href');
-          if (href.length > 1 && document.querySelector(href)) {
+          const target = href.length > 1 && document.querySelector(href);
+          if (target) {
             e.preventDefault();
-            document.querySelector(href).scrollIntoView({
-              behavior: prefersReduced ? 'auto' : 'smooth',
-              block: 'start'
+            // Offset by the fixed nav's real height so the section heading
+            // lands below the bar instead of underneath it
+            const nav = document.querySelector('.nav');
+            const offset = (nav ? nav.getBoundingClientRect().height : 96) + 24;
+            const y = Math.max(0, target.getBoundingClientRect().top + window.scrollY - offset);
+            window.scrollTo({
+              top: y,
+              behavior: prefersReduced ? 'auto' : 'smooth'
             });
           }
         });

@@ -850,11 +850,37 @@ function Expertise() {
 /* Values                                                      */
 /* ────────────────────────────────────────────────────────── */
 function Values() {
+  const ico = {
+    chat: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 5.8A1.8 1.8 0 0 1 5.8 4h12.4A1.8 1.8 0 0 1 20 5.8v8.4a1.8 1.8 0 0 1-1.8 1.8H9.2L5 19.6c-.5.4-1 .2-1-.5V5.8z"/>
+        <path d="M8.5 9h7"/><path d="M8.5 12h4.5"/>
+      </svg>
+    ),
+    doc: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M7 3h7l4 4v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/>
+        <path d="M14 3v4a1 1 0 0 0 1 1h3"/><path d="M9.3 14.8l2 2 3.6-4.3"/>
+      </svg>
+    ),
+    person: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="8.2" r="3.6"/>
+        <path d="M5 20c.9-3.4 3.7-5.2 7-5.2s6.1 1.8 7 5.2"/>
+      </svg>
+    ),
+    shield: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 3l7 2.6v5c0 4.7-2.9 8.1-7 10-4.1-1.9-7-5.3-7-10v-5L12 3z"/>
+        <path d="M9 11.6l2.2 2.2 3.8-4.4"/>
+      </svg>
+    ),
+  };
   const items = [
-    { g:"&", h:"Plain English",   p:"No fancy regulator language in our emails. If a driver can't understand it, we re-write it." },
-    { g:"§", h:"Real paper trail", p:"Every recommendation is backed by the rule it's based on. Every job done comes with proof." },
-    { g:"✱", h:"Same person",     p:"You get one named person handling your account, plus a backup. Not a help desk, not a chatbot." },
-    { g:"→", h:"We own it",       p:"If you fail an audit on something we manage, we fix it for free. That's how confident we are in our work." },
+    { n:"01", icon: ico.chat,   h:"Plain English",    p:"No fancy regulator language in our emails. If a driver can't understand it, we re-write it." },
+    { n:"02", icon: ico.doc,    h:"Real paper trail",  p:"Every recommendation is backed by the rule it's based on. Every job done comes with proof." },
+    { n:"03", icon: ico.person, h:"Same person",       p:"You get one named person handling your account, plus a backup. Not a help desk, not a chatbot." },
+    { n:"04", icon: ico.shield, h:"We own it",         p:"If you fail an audit on something we manage, we fix it for free. That's how confident we are in our work." },
   ];
   return (
     <section className="sec shell" id="values">
@@ -870,7 +896,10 @@ function Values() {
       <div className="values">
         {items.map((it,i)=>(
           <div key={i} className="value reveal" data-d={String(i+1)}>
-            <div className="glyph">{it.g}</div>
+            <div className="value-top">
+              <div className="v-icon">{it.icon}</div>
+              <span className="v-idx">{it.n}</span>
+            </div>
             <div>
               <h4>{it.h}</h4>
               <p>{it.p}</p>
