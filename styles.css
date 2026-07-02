@@ -759,23 +759,25 @@ hr.rule-soft { border:0; height:1px; background: var(--rule-soft); margin:0; }
   height: 96px;
 }
 .nav-brand {
-  position: relative; display: flex; align-items: center;
+  display: flex; align-items: center;
   font-weight: 500; letter-spacing: -0.01em; font-size: 16px;
 }
-/* One logo, two color variants that crossfade with the nav state:
-   white lockup over the dark hero, full-colour lockup on the white glass */
-.nav-logo {
-  height: 50px; width: auto; display: block;
-  object-fit: contain; transition: opacity .35s ease;
+.nav-logo { height: 64px; width: auto; display: block; object-fit: contain; }
+/* White card keeps the logo crisp over the dark hero; it blends away
+   once the nav turns to white glass on scroll */
+.nav-mark {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 8px 16px; border-radius: 16px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 2px 14px rgba(10, 31, 68, 0.18);
+  transition: background .35s ease, padding .35s ease, box-shadow .35s ease;
 }
-.nav-logo--solid {
-  position: absolute; left: 0; top: 50%; transform: translateY(-50%);
-  opacity: 0; pointer-events: none;
+.nav.nav-scrolled .nav-mark {
+  background: transparent; padding: 0; box-shadow: none;
 }
-.nav.nav-scrolled .nav-logo--hero { opacity: 0; }
-.nav.nav-scrolled .nav-logo--solid { opacity: 1; }
 @media (max-width: 520px) {
-  .nav-logo { height: 40px; }
+  .nav-logo { height: 50px; }
+  .nav-mark { padding: 6px 12px; }
 }
 .brand-mark {
   width: 30px; height: 30px;

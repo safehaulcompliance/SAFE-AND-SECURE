@@ -240,8 +240,9 @@ function Nav() {
     <nav className="nav">
       <div className="shell nav-row">
         <a className="nav-brand" href="#top" aria-label="Safe Haul Compliance">
-          <img src="logo-hero.png" alt="Safe Haul Compliance" className="nav-logo nav-logo--hero"/>
-          <img src="logo-solid.png" alt="" aria-hidden="true" className="nav-logo nav-logo--solid"/>
+          <span className="nav-mark">
+            <img src="logo.png" alt="Safe Haul Compliance" className="nav-logo"/>
+          </span>
         </a>
         <div className="nav-links">
           <a href="#services">Services</a>
