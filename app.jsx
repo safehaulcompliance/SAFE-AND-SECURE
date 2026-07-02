@@ -951,9 +951,22 @@ function Contact() {
               <span className="x">We reply quickly</span>
             </div>
             <hr className="rule-soft"/>
-            <div className="cm-row">
-              <span className="k">Office</span>
-              <span className="v">Near Post Office, Sujanpur<br/>Pathankot, Punjab 145023, India</span>
+            <div className="cm-row cm-row--locs">
+              <span className="k">Offices</span>
+              <div className="cm-locs">
+                <div className="cm-loc">
+                  <span className="cm-loc-tag">Canada · HQ</span>
+                  <span className="cm-loc-addr">3068 Barrydowne Road<br/>Sudbury, Ontario, Canada</span>
+                </div>
+                <div className="cm-loc">
+                  <span className="cm-loc-tag">USA · HQ</span>
+                  <span className="cm-loc-addr">2200 W Meeker St, Apt X320<br/>Kent, WA, USA</span>
+                </div>
+                <div className="cm-loc">
+                  <span className="cm-loc-tag">India · Support</span>
+                  <span className="cm-loc-addr">Near Post Office, Sujanpur<br/>Pathankot, Punjab 145023, India</span>
+                </div>
+              </div>
               <span className="x">By appointment</span>
             </div>
           </div>
@@ -1076,7 +1089,12 @@ function Footer() {
             <h5>Reach us</h5>
             <a href="tel:3502000085">350-200-0085</a>
             <a href="mailto:info@safehaulcompliance.com">info@safehaulcompliance.com</a>
-            <a>Sujanpur, Pathankot, Punjab, India</a>
+          </div>
+          <div className="foot-col">
+            <h5>Offices</h5>
+            <div className="foot-loc"><b>Canada · HQ</b>3068 Barrydowne Road, Sudbury, Ontario</div>
+            <div className="foot-loc"><b>USA · HQ</b>2200 W Meeker St, Apt X320, Kent, WA</div>
+            <div className="foot-loc"><b>India · Support</b>Sujanpur, Pathankot, Punjab 145023</div>
           </div>
           <div className="foot-col">
             <h5>Legal</h5>
@@ -1086,7 +1104,7 @@ function Footer() {
         </div>
         <div className="foot-bot">
           <span>© 2026 Safe Haul Compliance — All rights reserved.</span>
-          <span>Based in Ontario · Serving USA &amp; Canada</span>
+          <span>Offices in Canada · USA · India — Serving USA &amp; Canada</span>
         </div>
       </div>
     </footer>

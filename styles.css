@@ -1750,6 +1750,13 @@ hr.rule-soft { border:0; height:1px; background: var(--rule-soft); margin:0; }
 .cm-row .k { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
 .cm-row .v { font-weight: 500; }
 .cm-row .x { font-family: var(--f-mono); font-size: 11px; color: var(--mute); }
+.cm-row--locs { align-items: start; }
+.cm-locs { display: grid; gap: 14px; }
+.cm-loc-tag {
+  display: block; font-family: var(--f-mono); font-size: 10px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--signal); margin-bottom: 3px;
+}
+.cm-loc-addr { font-weight: 500; font-size: 14px; line-height: 1.5; color: var(--ink); }
 
 .form { background: var(--paper-2); padding: 28px; border: 1px solid var(--ink); }
 .form h3 { margin: 0 0 22px; font-family: var(--f-sans); font-weight: 500; font-size: 22px; letter-spacing: -0.015em; }
@@ -1795,7 +1802,7 @@ hr.rule-soft { border:0; height:1px; background: var(--rule-soft); margin:0; }
   background: radial-gradient(ellipse at center top, rgba(96, 165, 250, 0.15) 0%, transparent 70%);
   pointer-events: none;
 }
-.foot-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px; padding-bottom: 56px; border-bottom: 1px solid rgba(255,255,255,.16); }
+.foot-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr 1fr; gap: 32px; padding-bottom: 56px; border-bottom: 1px solid rgba(255,255,255,.16); }
 .foot-brand h3 {
   font-family: var(--f-sans); font-weight: 500; font-size: clamp(48px, 6vw, 96px);
   letter-spacing: -0.04em; line-height: 0.9; margin: 0;
@@ -1805,6 +1812,11 @@ hr.rule-soft { border:0; height:1px; background: var(--rule-soft); margin:0; }
 .foot-col h5 { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute-2); margin: 0 0 16px; font-weight: 500; }
 .foot-col a { display: block; padding: 6px 0; font-size: 14px; color: var(--paper); }
 .foot-col a:hover { color: var(--signal); }
+.foot-loc { padding: 7px 0; font-size: 13px; line-height: 1.5; color: var(--paper); max-width: 24ch; }
+.foot-loc b {
+  display: block; font-family: var(--f-mono); font-weight: 500; font-size: 9.5px;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--mute-2); margin-bottom: 2px;
+}
 .foot-bot { display: flex; justify-content: space-between; padding-top: 28px; font-family: var(--f-mono); font-size: 11px; letter-spacing: .1em; color: var(--mute-2); }
 
 /* ── responsive ────────────────────────────────────────── */
