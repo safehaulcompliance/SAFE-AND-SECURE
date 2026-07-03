@@ -1447,9 +1447,9 @@ function AuditTool() {
         <div className="au-cta-grid">
           <div className="au-cta-card au-cta-card--main">
             <div className="au-sec-lbl mono">Want it fixed for you?</div>
-            <h4>Let Safe Haul close {gaps.length > 0 ? `all ${gaps.length} gap${gaps.length === 1 ? "" : "s"}` : "the loop"} — free fleet audit, 48-hour turnaround.</h4>
-            <p>A real compliance specialist reviews your files, confirms every gap above, and hands you a signed one-page memo with a flat-rate plan. No retainers.</p>
-            <a className="btn btn--signal" href="#contact">Get my free fleet audit <Arrow/></a>
+            <h4>Let Safe Haul close {gaps.length > 0 ? `all ${gaps.length} gap${gaps.length === 1 ? "" : "s"}` : "the loop"} for you.</h4>
+            <p>A real compliance specialist reviews your files, confirms every gap above, and comes back with a flat-rate plan within 48 hours. No retainers.</p>
+            <a className="btn btn--signal" href="#contact">Talk to a specialist <Arrow/></a>
           </div>
           <div className="au-cta-card">
             <div className="au-sec-lbl mono">Email me this report</div>
@@ -1502,30 +1502,6 @@ function AuditTool() {
 /* Contact                                                     */
 /* ────────────────────────────────────────────────────────── */
 function Contact() {
-  const [sent, setSent] = useState(false);
-  const [sending, setSending] = useState(false);
-  const [sendError, setSendError] = useState("");
-
-  async function handleAuditSubmit(e) {
-    e.preventDefault();
-    if (sending || sent) return;
-    setSending(true);
-    setSendError("");
-    const data = new FormData(e.currentTarget);
-    try {
-      const res = await fetch("https://formsubmit.co/ajax/info@safehaulcompliance.com", {
-        method: "POST",
-        headers: { "Accept": "application/json" },
-        body: data,
-      });
-      if (!res.ok) throw new Error("network");
-      setSent(true);
-    } catch {
-      setSendError("Couldn't send. Email us at info@safehaulcompliance.com or call 350-200-0085.");
-    } finally {
-      setSending(false);
-    }
-  }
   return (
     <section className="contact shell" id="contact">
       <div className="sec-head">
@@ -1574,7 +1550,7 @@ function Contact() {
             <ul style={{listStyle:"none", padding:0, margin:0, display:"grid", gap:10, fontSize:14.5}}>
               <li style={{display:"flex", gap:12}}>
                 <span className="mono" style={{color:"var(--mute)"}}>01</span>
-                A one-page audit memo, signed.
+                Your USDOT profile reviewed before we talk.
               </li>
               <li style={{display:"flex", gap:12}}>
                 <span className="mono" style={{color:"var(--mute)"}}>02</span>
@@ -1588,77 +1564,31 @@ function Contact() {
           </div>
         </div>
 
-        <form className="form reveal-x" onSubmit={handleAuditSubmit}>
-          <h3>Free fleet audit <span className="italic-serif" style={{color:"var(--mute)"}}>—  48-hour turnaround</span></h3>
+        <div className="contact-card reveal-x">
+          <h3>Talk to a compliance <span className="italic-serif">specialist</span></h3>
+          <p className="cc-lede">
+            No forms, no portals. Reach a real person directly — we reply within one business day.
+          </p>
 
-          {/* FormSubmit config */}
-          <input type="hidden" name="_subject" value="New fleet audit request — safehaulcompliance.com"/>
-          <input type="hidden" name="_template" value="table"/>
-          <input type="hidden" name="_captcha" value="false"/>
-          <input type="text" name="_honey" style={{display:"none"}} tabIndex={-1} autoComplete="off"/>
-
-          <div className="form-row">
-            <div className="field">
-              <label>Your name <span className="req">*</span></label>
-              <input name="name" required placeholder=""/>
-            </div>
-            <div className="field">
-              <label>Role</label>
-              <select name="role" defaultValue="">
-                <option value="" disabled>Select a role…</option>
-                <option>Owner-operator</option>
-                <option>Safety / compliance</option>
-                <option>Ops / dispatch</option>
-                <option>Finance</option>
-              </select>
-            </div>
+          <div className="cc-actions">
+            <a className="btn btn--signal cc-btn" href="mailto:info@safehaulcompliance.com?subject=Fleet%20compliance%20enquiry">
+              Email info@safehaulcompliance.com <Arrow/>
+            </a>
+            <a className="btn cc-btn" href="tel:+13502000085">Call +1 350-200-0085</a>
+            <a className="btn cc-btn" href="https://wa.me/918198075620?text=Hello%20Safe%20Haul%20Compliance%2C%20I%20need%20assistance%20with%20my%20trucking%20compliance."
+              target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
           </div>
 
-          <div className="form-row">
-            <div className="field">
-              <label>Email <span className="req">*</span></label>
-              <input type="email" name="email" required placeholder="you@yourcompany.com"/>
-            </div>
-            <div className="field">
-              <label>Phone</label>
-              <input type="tel" name="phone" placeholder="350-200-0085"/>
-            </div>
+          <hr className="rule-soft" style={{margin:"26px 0"}}/>
+
+          <div className="cc-audit">
+            <span className="cc-k mono">Not sure where you stand?</span>
+            <p>Run the free 3-minute FMCSA audit readiness check and bring your score to the call.</p>
+            <a className="cc-link" href="#audit">Check my audit readiness <Arrow/></a>
           </div>
 
-          <div className="form-row">
-            <div className="field">
-              <label>Company name</label>
-              <input name="company" placeholder="Your trucking company"/>
-            </div>
-            <div className="field">
-              <label>Fleet size</label>
-              <select name="fleet_size" defaultValue="">
-                <option value="" disabled>How many power units?</option>
-                <option>1 – 5</option>
-                <option>6 – 25</option>
-                <option>26 – 100</option>
-                <option>100+</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="field">
-            <label>What&rsquo;s the headache today? <span style={{color:"var(--mute)"}}>(optional)</span></label>
-            <textarea name="message" placeholder="e.g. Our IFTA filing is due next week and we just hired 3 new drivers."></textarea>
-          </div>
-
-          <button className="btn btn--signal" type="submit" disabled={sending || sent} style={{width:"100%", justifyContent:"center", height:54}}>
-            {sent ? "Got it — we'll be in touch within 48 hours" : sending ? "Sending…" : (<>Send for audit <Arrow/></>)}
-          </button>
-          {sendError && (
-            <div style={{marginTop:12, fontFamily:"var(--f-mono)", fontSize:11.5, letterSpacing:".06em", color:"#b42318"}}>
-              {sendError}
-            </div>
-          )}
-          <div style={{marginTop:14, fontFamily:"var(--f-mono)", fontSize:10.5, letterSpacing:".12em", textTransform:"uppercase", color:"var(--mute)"}}>
-            Encrypted in transit · No third-party trackers
-          </div>
-        </form>
+          <div className="cc-note mono">Replies within 1 business day &middot; USA &amp; Canada</div>
+        </div>
       </div>
     </section>
   );
